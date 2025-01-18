@@ -1,5 +1,5 @@
 import Creature from "./Creature.js";
-import SpiderControls from "./controls/SpiderControls.js";
+import SpiderControls from "./creaturecontrols/SpiderControls.js";
 
 class Spider extends Creature {
 	constructor (x, y, width, height, spriteMap) {
@@ -36,16 +36,6 @@ class Spider extends Creature {
 		this.animationPaused = action == 'stop';
 		this.currentAnimation = action;
 		this.updateAnimationStatus();
-	}
-
-	drawDebug (ctx) {
-		ctx.fillStyle = '#f00';
-
-		ctx.save();
-		ctx.translate(this.position.x, this.position.y);
-		ctx.rotate(this.rotation);
-		ctx.fillRect(-this.width * 0.5, -this.height * 0.5, this.width, this.height);
-		ctx.restore();
 	}
 
 	draw (ctx) {

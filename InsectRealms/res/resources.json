@@ -1,0 +1,24 @@
+{
+	"resources": [
+		{
+			"type": "sprite",
+			"name": "spider12",
+			"extension": "png",
+			"path": "creatures/spider/"
+		},
+		{
+			"type": "json",
+			"name": "spider_map",
+			"extension": "json",
+			"path": "creatures/spider/"
+		}
+	],
+	"maps": [
+		{
+			"type": "json",
+			"name": "M0001",
+			"extension": "json",
+			"path": "maps/"
+		}
+	]
+}

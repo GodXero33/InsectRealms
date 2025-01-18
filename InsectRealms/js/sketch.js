@@ -1,4 +1,4 @@
-import InsectWorld from './InsectWorld.js';
+import InsectWorld from './world/InsectWorld.js';
 
 (function (exports) {
 	let canvas, ctx, insectWorld, worldResources;
@@ -20,8 +20,8 @@ import InsectWorld from './InsectWorld.js';
 		ctx.fillStyle = '#232323';
 
 		ctx.fillRect(0, 0, width, height);
-		drawFPS();
 		insectWorld.render(ctx, width, height);
+		drawFPS();
 	}
 
 	function update (dt) {
@@ -68,13 +68,13 @@ import InsectWorld from './InsectWorld.js';
 		worldResources = resources;
 		canvas = document.getElementById('canvas');
 		ctx = canvas.getContext('2d');
-		insectWorld = new InsectWorld(worldResources);
+		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001']);
 
 		console.log(insectWorld);
-		console.log(true);
 		window.addEventListener('resize', resize);
 		window.addEventListener('keydown', (event) => {
 			if (event.code == 'Space') (playing ? pause : play)();
+			if (event.code == 'KeyL') insectWorld.debugMode = !insectWorld.debugMode;
 		})
 
 		resize();

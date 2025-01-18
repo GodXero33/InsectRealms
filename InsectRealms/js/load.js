@@ -2,7 +2,10 @@
 	let resourcesMap;
 	const loadedResources = [];
 	const failedResources = [];
-	const loadedResourcesMap = {};
+	const loadedResourcesMap = {
+		resources: {},
+		maps: {}
+	};
 
 	function resourceLoadOk (URL, ok) {
 		if (ok) {
@@ -55,13 +58,24 @@
 	}
 
 	async function loadResources () {
-		for (let a = 0; a < resourcesMap.length; a++) {
-			const resource = resourcesMap[a];
+		const resourcesCount = resourcesMap.resources.length + resourcesMap.maps.length;
+
+		for (let a = 0; a < resourcesMap.resources.length; a++) {
+			const resource = resourcesMap.resources[a];
 			const response = await loadResource(`res/${resource.path}${resource.name}.${resource.extension}`, resource.type, resource.name);
 			
-			if (response.ok) loadedResourcesMap[response.name] = response.res;
+			if (response.ok) loadedResourcesMap.resources[response.name] = response.res;
 
-			console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesMap.length).toFixed(2) + ' %');
+			console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
+		}
+
+		for (let a = 0; a < resourcesMap.maps.length; a++) {
+			const resource = resourcesMap.maps[a];
+			const response = await loadResource(`res/${resource.path}${resource.name}.${resource.extension}`, resource.type, resource.name);
+			
+			if (response.ok) loadedResourcesMap.maps[response.name] = response.res;
+
+			console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
 		}
 
 		console.log(loadedResourcesMap);
@@ -70,7 +84,7 @@
 
 	async function loadResourceMap () {
 		try {
-			const response = await fetch('res/res.json');
+			const response = await fetch('res/resources.json');
 
 			if (!response.ok) return;
 

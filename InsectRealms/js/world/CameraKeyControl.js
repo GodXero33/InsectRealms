@@ -4,8 +4,8 @@ class CameraKeyControl {
 		this.moveDown = false;
 		this.moveRight = false;
 		this.moveLeft = false;
-		this.turnLeft = false;
-		this.turnRight = false;
+		/* this.turnLeft = false;
+		this.turnRight = false; */
 		this.zoomIn = false;
 		this.zoomOut = false;
 
@@ -40,7 +40,7 @@ class CameraKeyControl {
 			return;
 		}
 
-		if (code == 'KeyE') {
+		/* if (code == 'KeyE') {
 			this.turnRight = true;
 			return;
 		}
@@ -48,7 +48,7 @@ class CameraKeyControl {
 		if (code == 'KeyQ') {
 			this.turnLeft = true;
 			return;
-		}
+		} */
 
 		if (code == 'KeyZ') {
 			this.zoomIn = true;
@@ -83,7 +83,7 @@ class CameraKeyControl {
 			return;
 		}
 
-		if (code == 'KeyE') {
+		/* if (code == 'KeyE') {
 			this.turnRight = false;
 			return;
 		}
@@ -91,7 +91,7 @@ class CameraKeyControl {
 		if (code == 'KeyQ') {
 			this.turnLeft = false;
 			return;
-		}
+		} */
 
 		if (code == 'KeyZ') {
 			this.zoomIn = false;
@@ -104,33 +104,45 @@ class CameraKeyControl {
 	}
 
 	update (camera) {
-		const movementSpeed = 200;
+		const movementSpeed = 50;
 		const rotationSpeed = 0.01;
 		const zoomingFact = 0.1;
+		const canvasWidth = camera.world.width;
+		const canvasHeight = camera.world.height;
+		const worldWidth = camera.world.worldWidth;
+		const worldHeight = camera.world.worldHeight;
 
 		if (this.moveUp) {
 			camera.position.y -= movementSpeed;
+
+			if (camera.position.y < (canvasHeight - worldHeight) / 2) camera.position.y = (canvasHeight - worldHeight) / 2;
 		}
 
 		if (this.moveDown) {
 			camera.position.y += movementSpeed;
+
+			if (camera.position.y > (worldHeight - canvasHeight) / 2) camera.position.y = (worldHeight - canvasHeight) / 2;
 		}
 
 		if (this.moveLeft) {
 			camera.position.x -= movementSpeed;
+
+			if (camera.position.x < (canvasWidth - worldWidth) / 2) camera.position.x = (canvasWidth - worldWidth) / 2;
 		}
 
 		if (this.moveRight) {
 			camera.position.x += movementSpeed;
+
+			if (camera.position.x > (worldWidth - canvasWidth) / 2) camera.position.x = (worldWidth - canvasWidth) / 2;
 		}
 
-		if (this.turnLeft) {
+		/* if (this.turnLeft) {
 			camera.rotation -= rotationSpeed;
 		}
 
 		if (this.turnRight) {
 			camera.rotation += rotationSpeed;
-		}
+		} */
 
 		if (this.zoomIn) {
 			const newScale = camera.scale * (1 - zoomingFact);
