@@ -14,13 +14,25 @@ class InsectWorld {
 		this.worldHeight = 10000;
 		this.objects = [];
 
-		MapLoader.load(this, mapData);
+		MapLoader.load(this, mapData, 2);
 	}
 
 	#drawGrid (ctx, cellSize = 50) {
-		ctx.fillStyle = '#f00';
+		ctx.strokeStyle = '#f00';
 
-		for (let y = -this.worldHeight / 2; y < this.worldHeight / 2; y += cellSize) for (let x = -this.worldWidth / 2; x < this.worldWidth / 2; x += cellSize) ctx.fillRect(x - cellSize / 2 - 1, y - cellSize / 2 - 1, cellSize - 2, cellSize - 2);
+		ctx.beginPath();
+
+		for (let y = -this.worldHeight / 2; y < this.worldHeight / 2; y += cellSize) {
+			ctx.moveTo(-this.worldWidth / 2, y);
+			ctx.lineTo(this.worldWidth / 2, y);
+		}
+
+		for (let x = -this.worldWidth / 2; x < this.worldWidth / 2; x += cellSize) {
+			ctx.moveTo(x, -this.worldWidth / 2);
+			ctx.lineTo(x, this.worldWidth / 2);
+		}
+
+		ctx.stroke();
 	}
 
 	render (ctx, width, height) {
@@ -35,7 +47,17 @@ class InsectWorld {
 			this.#drawGrid(ctx, 120);
 			drawableObjects.forEach(object => object.drawDebug(ctx));
 		} else {
-			drawableObjects.forEach(object => object.draw(ctx));
+			const cameraX = this.camera.position.x;
+			const cameraY = this.camera.position.y;
+
+			drawableObjects.forEach(object => { if (object.castShadow) object.drawShadow(ctx, '#00000088'); });
+			drawableObjects.forEach(object => {
+				if (object.isLayered) {
+					object.draw(ctx, cameraX, cameraY, this.width, this.height);
+				} else {
+					object.draw(ctx);
+				}
+			});
 		}
 
 		ctx.setTransform(transform);

@@ -1,4 +1,4 @@
-import Point from "../geo/Point.js";
+import Point from "../extra/Point.js";
 
 class WorldObject {
 	constructor (x, y, rotation, width, height) {
@@ -21,6 +21,8 @@ class WorldObject {
 		ctx.fillRect(-this.width * 0.5, -this.height * 0.5, this.width, this.height);
 		ctx.restore();
 	}
+
+	drawShadow (ctx, color) {}
 
 	draw (ctx) {}
 

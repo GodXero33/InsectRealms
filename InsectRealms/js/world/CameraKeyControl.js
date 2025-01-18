@@ -104,9 +104,9 @@ class CameraKeyControl {
 	}
 
 	update (camera) {
-		const movementSpeed = 50;
-		const rotationSpeed = 0.01;
-		const zoomingFact = 0.1;
+		const movementSpeed = camera.panningSpeed;
+		// const rotationSpeed = 0.01;
+		const zoomingFact = camera.zoomingFact;
 		const canvasWidth = camera.world.width;
 		const canvasHeight = camera.world.height;
 		const worldWidth = camera.world.worldWidth;

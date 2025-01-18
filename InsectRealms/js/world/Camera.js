@@ -1,4 +1,4 @@
-import Point from "../geo/Point.js";
+import Point from "../extra/Point.js";
 import CameraKeyControl from "./CameraKeyControl.js";
 
 class Camera {
@@ -6,9 +6,11 @@ class Camera {
 		this.world = world;
 		this.position = new Point(x, y);
 		this.scale = 1;
-		this.rotation = 0;
+		// this.rotation = 0;
 		this.maxZoom = 5;
 		this.minZoom = 1;
+		this.panningSpeed = 2;
+		this.zoomingFact = 0.1;
 
 		this.control = new CameraKeyControl();
 	}
