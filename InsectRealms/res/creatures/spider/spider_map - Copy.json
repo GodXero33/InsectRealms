@@ -1,0 +1,53 @@
+{
+	"animations": {
+		"walk01": {
+			"frames": 6,
+			"frameY": 1,
+			"frameX": 5
+		},
+		"walk02": {
+			"frames": 6,
+			"frameY": 2,
+			"frameX": 5
+		},
+		"walk03": {
+			"frames": 6,
+			"frameY": 3,
+			"frameX": 5
+		},
+		"walk04": {
+			"frames": 6,
+			"frameY": 4,
+			"frameX": 5
+		},
+		"attack01": {
+			"frames": 4,
+			"frameY": 1,
+			"frameX": 1
+		},
+		"attack02": {
+			"frames": 4,
+			"frameY": 2,
+			"frameX": 1
+		},
+		"attack03": {
+			"frames": 4,
+			"frameY": 3,
+			"frameX": 1
+		},
+		"attack04": {
+			"frames": 4,
+			"frameY": 4,
+			"frameX": 1
+		},
+		"dead": {
+			"frames": 4,
+			"frameY": 5,
+			"frameX": 1
+		}
+	},
+	"width": 640,
+	"height": 320,
+	"frameWidth": 64,
+	"frameHeight": 64
+}

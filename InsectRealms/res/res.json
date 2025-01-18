@@ -1,0 +1,80 @@
+[
+	{
+		"type": "sprite",
+		"name": "spider01",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider02",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider03",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider04",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider05",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider06",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider07",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider08",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider09",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider10",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider11",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "sprite",
+		"name": "spider12",
+		"extension": "png",
+		"path": "creatures/spider/"
+	},
+	{
+		"type": "json",
+		"name": "spider_map",
+		"extension": "json",
+		"path": "creatures/spider/"
+	}
+]
