@@ -1,5 +1,6 @@
 class CameraKeyControl {
-	constructor () {
+	constructor (camera) {
+		this.camera = camera;
 		this.moveUp = false;
 		this.moveDown = false;
 		this.moveRight = false;
@@ -8,6 +9,8 @@ class CameraKeyControl {
 		this.turnRight = false; */
 		this.zoomIn = false;
 		this.zoomOut = false;
+
+		this.camera.keyControl = this;
 
 		this.#initEvents();
 	}
@@ -103,7 +106,8 @@ class CameraKeyControl {
 		}
 	}
 
-	update (camera) {
+	update () {
+		const camera = this.camera;
 		const movementSpeed = camera.panningSpeed;
 		// const rotationSpeed = 0.01;
 		const zoomingFact = camera.zoomingFact;

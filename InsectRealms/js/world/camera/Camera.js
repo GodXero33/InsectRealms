@@ -1,5 +1,4 @@
-import Point from "../extra/Point.js";
-import CameraKeyControl from "./CameraKeyControl.js";
+import Point from "../../extra/Point.js";
 
 class Camera {
 	constructor (world, x, y) {
@@ -11,12 +10,13 @@ class Camera {
 		this.minZoom = 1;
 		this.panningSpeed = 2;
 		this.zoomingFact = 0.1;
-
-		this.control = new CameraKeyControl();
+		this.keyControl = null;
+		this.mouseControl = null;
 	}
 
 	update (ctx) {
-		this.control.update(this);
+		if (this.keyControl) this.keyControl.update();
+		
 		// ctx.rotate(-this.rotation);
 		ctx.scale(this.scale, this.scale);
 		ctx.translate(-this.position.x, -this.position.y);

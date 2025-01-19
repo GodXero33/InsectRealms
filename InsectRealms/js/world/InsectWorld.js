@@ -1,4 +1,4 @@
-import Camera from "./Camera.js";
+import Camera from "./camera/Camera.js";
 import MapLoader from "./MapLoader.js";
 import WorldObject from "./WorldObject.js";
 

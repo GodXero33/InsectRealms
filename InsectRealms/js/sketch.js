@@ -1,14 +1,16 @@
+import CameraMouseControl from './world/camera/CameraMouseControl.js';
+import CameraKeyControl from './world/camera/CameraKeyControl.js';
 import InsectWorld from './world/InsectWorld.js';
 
 (function (exports) {
-	let canvas, ctx, insectWorld, worldResources, gui;
+	let canvas, ctx, insectWorld, worldResources, gui, statsDisplay;
 	let playing = false;
 	let prevTime = 0;
 	let fps = 0;
 	let width = 0;
 	let height = 0;
 	
-	const simulationData = { FPS: 0, visibleObjects: 0 };
+	const simulationData = { visibleObjects: 0 };
 
 	function draw () {
 		ctx.fillStyle = '#787812';
@@ -37,10 +39,11 @@ import InsectWorld from './world/InsectWorld.js';
 		let now = window.performance.now();
 		let dt = now - prevTime;
 		dt = Math.max(dt, 2);
-		simulationData.FPS = 1000 / dt;
 
+		statsDisplay.begin();
 		draw();
 		update(dt);
+		statsDisplay.end();
 
 		simulationData.visibleObjects = insectWorld.drawableObjects.length;
 		prevTime = now;
@@ -62,7 +65,6 @@ import InsectWorld from './world/InsectWorld.js';
 		gui = new dat.GUI();
 
 		const fpsFolder = gui.addFolder('Simulation Data');
-		fpsFolder.add(simulationData, 'FPS').name('FPS').listen();
 		fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
 		fpsFolder.open();
 
@@ -86,14 +88,24 @@ import InsectWorld from './world/InsectWorld.js';
 		cameraFolder.open();
 	}
 
+	function createStatsDisplay () {
+		statsDisplay = new Stats();
+
+		statsDisplay.showPanel(0);
+		document.body.appendChild(statsDisplay.dom);
+	}
+
 	function init (resources) {
 		worldResources = resources;
 		canvas = document.getElementById('canvas');
 		ctx = canvas.getContext('2d');
 		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001'].objects);
+		const keyControl = new CameraKeyControl(insectWorld.camera);
+		const mouseControl = new CameraMouseControl(insectWorld.camera, canvas);
 		
 		console.log(insectWorld);
 		createGUI();
+		createStatsDisplay();
 		window.addEventListener('resize', resize);
 		window.addEventListener('keydown', (event) => {
 			if (event.code == 'Space') (playing ? pause : play)();
