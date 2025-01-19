@@ -1,9 +1,10 @@
 import CameraMouseControl from './world/camera/CameraMouseControl.js';
 import CameraKeyControl from './world/camera/CameraKeyControl.js';
 import InsectWorld from './world/InsectWorld.js';
+import MiniMap from './world/MiniMap.js';
 
 (function (exports) {
-	let canvas, ctx, insectWorld, worldResources, gui, statsDisplay;
+	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay;
 	let playing = false;
 	let prevTime = 0;
 	let fps = 0;
@@ -17,6 +18,7 @@ import InsectWorld from './world/InsectWorld.js';
 
 		ctx.fillRect(0, 0, width, height);
 		insectWorld.render(ctx, width, height);
+		miniMap.draw(ctx, width, height);
 	}
 
 	function update (dt) {
@@ -100,8 +102,10 @@ import InsectWorld from './world/InsectWorld.js';
 		canvas = document.getElementById('canvas');
 		ctx = canvas.getContext('2d');
 		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001'].objects);
-		const keyControl = new CameraKeyControl(insectWorld.camera);
-		const mouseControl = new CameraMouseControl(insectWorld.camera, canvas);
+		miniMap = new MiniMap(insectWorld);
+
+		new CameraKeyControl(insectWorld.camera);
+		new CameraMouseControl(insectWorld.camera, canvas);
 		
 		console.log(insectWorld);
 		createGUI();
@@ -110,7 +114,7 @@ import InsectWorld from './world/InsectWorld.js';
 		window.addEventListener('keydown', (event) => {
 			if (event.code == 'Space') (playing ? pause : play)();
 			if (event.code == 'KeyL') insectWorld.debugMode = !insectWorld.debugMode;
-		})
+		});
 
 		resize();
 		play();

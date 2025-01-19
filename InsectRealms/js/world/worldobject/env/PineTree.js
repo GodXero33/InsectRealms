@@ -27,6 +27,7 @@ class PineTree extends WorldObject {
 			return points;
 		});
 		this.colors = Array.from({ length: PineTree.LAYERS }, (_, index) => `#00${Math.floor(map(index, 0, PineTree.LAYERS, 50, 255)).toString(16).padStart(2, 0)}00`);
+		this.miniMapColor = '#00ff00';
 		this.isLayered = true;
 		this.castShadow = true;
 	}
