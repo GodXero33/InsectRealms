@@ -8,8 +8,19 @@ class WorldObject {
 		this.height = height;
 	}
 
-	static isInViewport (worldObject, viewPortWidth, viewPortHeight) {
-		return true;
+	static isInViewport (worldObject, cameraX, cameraY, cameraScale, viewPortWidth, viewPortHeight) {
+		const halfViewportWidth = (viewPortWidth / cameraScale) / 2;
+		const halfViewportHeight = (viewPortHeight / cameraScale) / 2;
+		const viewportLeft = cameraX - halfViewportWidth;
+		const viewportRight = cameraX + halfViewportWidth;
+		const viewportTop = cameraY - halfViewportHeight;
+		const viewportBottom = cameraY + halfViewportHeight;
+		const objLeft = worldObject.position.x - worldObject.width / 2;
+		const objRight = worldObject.position.x + worldObject.width / 2;
+		const objTop = worldObject.position.y - worldObject.height / 2;
+		const objBottom = worldObject.position.y + worldObject.height / 2;
+
+		return objRight > viewportLeft && objLeft < viewportRight && objBottom > viewportTop && objTop < viewportBottom;
 	}
 
 	drawDebug (ctx, color = '#f00') {

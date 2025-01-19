@@ -8,21 +8,14 @@ import InsectWorld from './world/InsectWorld.js';
 	let width = 0;
 	let height = 0;
 	let isFirstCall = true;
-
-	function drawFPS () {
-		ctx.fillStyle = '#ffffff';
-		ctx.font = '20px Arial';
-		ctx.textBaseline = 'middle';
-		ctx.textAlign = 'center';
-		ctx.fillText(Math.floor(fps), 30, 20);
-	}
+	
+	const simulationData = { FPS: 0, visibleObjects: 0 };
 
 	function draw () {
 		ctx.fillStyle = '#787812';
 
 		ctx.fillRect(0, 0, width, height);
 		insectWorld.render(ctx, width, height);
-		drawFPS();
 	}
 
 	function update (dt) {
@@ -45,11 +38,12 @@ import InsectWorld from './world/InsectWorld.js';
 		let now = window.performance.now();
 		let dt = now - prevTime;
 		dt = Math.max(dt, 2);
-		fps = 1000 / dt;
+		simulationData.FPS = 1000 / dt;
 
 		draw();
 		update(dt);
 
+		simulationData.visibleObjects = insectWorld.drawableObjects.length;
 		prevTime = now;
 
 		window.requestAnimationFrame(animate);
@@ -68,6 +62,11 @@ import InsectWorld from './world/InsectWorld.js';
 	function createGUI () {
 		gui = new dat.GUI();
 
+		const fpsFolder = gui.addFolder('Simulation Data');
+		fpsFolder.add(simulationData, 'FPS').name('FPS').listen();
+		fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
+		fpsFolder.open();
+
 		const worldSettingsFolder = gui.addFolder('World Settings');
 		const cameraFolder = worldSettingsFolder.addFolder('Camera');
 
@@ -76,13 +75,13 @@ import InsectWorld from './world/InsectWorld.js';
 		cameraFolder.add(insectWorld.camera, 'panningSpeed', 1, 10);
 		cameraFolder.add(insectWorld.camera, 'zoomingFact', 0.01, 0.5);
 
-		const actions = {
+		/* const actions = {
 			resetWorld: function () {
 				init(worldResources);
 			}
 		};
 
-		gui.add(actions, 'resetWorld').name('Reset World');
+		gui.add(actions, 'resetWorld').name('Reset World'); */
 
 		worldSettingsFolder.open();
 		cameraFolder.open();
@@ -94,7 +93,10 @@ import InsectWorld from './world/InsectWorld.js';
 		ctx = canvas.getContext('2d');
 		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001'].objects);
 
-		if (!isFirstCall) return;
+		if (!isFirstCall) {
+			resize();
+			return;
+		}
 
 		isFirstCall = false;
 		

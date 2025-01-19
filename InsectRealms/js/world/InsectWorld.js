@@ -13,6 +13,7 @@ class InsectWorld {
 		this.worldWidth = 10000;
 		this.worldHeight = 10000;
 		this.objects = [];
+		this.drawableObjects = [];
 
 		MapLoader.load(this, mapData, 2);
 	}
@@ -41,17 +42,17 @@ class InsectWorld {
 		ctx.translate(width / 2, height / 2);
 		this.camera.update(ctx);
 
-		const drawableObjects = this.objects.filter(object => WorldObject.isInViewport(object, this.width, this.height));
+		this.drawableObjects = this.objects.filter(object => WorldObject.isInViewport(object, this.camera.position.x, this.camera.position.y, this.camera.scale, this.width, this.height));
 		
 		if (this.debugMode) {
 			this.#drawGrid(ctx, 120);
-			drawableObjects.forEach(object => object.drawDebug(ctx));
+			this.drawableObjects.forEach(object => object.drawDebug(ctx));
 		} else {
 			const cameraX = this.camera.position.x;
 			const cameraY = this.camera.position.y;
 
-			drawableObjects.forEach(object => { if (object.castShadow) object.drawShadow(ctx, '#00000088'); });
-			drawableObjects.forEach(object => {
+			this.drawableObjects.forEach(object => { if (object.castShadow) object.drawShadow(ctx, '#00000088'); });
+			this.drawableObjects.forEach(object => {
 				if (object.isLayered) {
 					object.draw(ctx, cameraX, cameraY, this.width, this.height);
 				} else {
