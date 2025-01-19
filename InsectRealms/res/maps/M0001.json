@@ -1,39 +1,53 @@
 {
-	"objects": [
-		{
-			"type": "pine-tree",
-			"x": 0,
-			"y": 0,
-			"rotation": 0,
-			"size": 100
-		},
-		{
-			"type": "pine-tree",
-			"x": 200,
-			"y": 0,
-			"rotation": 0,
-			"size": 200
-		},
-		{
-			"type": "pine-tree",
-			"x": -200,
-			"y": 100,
-			"rotation": 0,
-			"size": 150
-		},
-		{
-			"type": "pine-tree",
-			"x": -100,
-			"y": -150,
-			"rotation": 0,
-			"size": 60
-		},
-		{
-			"type": "pine-tree",
-			"x": 200,
-			"y": 200,
-			"rotation": 0,
-			"size": 90
-		}
-	]
+    "objects": [
+        { "type": "pine-tree", "x": -736, "y": 412, "rotation": 0, "size": 150 },
+        { "type": "pine-tree", "x": 640, "y": -188, "rotation": 0, "size": 60 },
+        { "type": "pine-tree", "x": -581, "y": 990, "rotation": 0, "size": 120 },
+        { "type": "pine-tree", "x": 234, "y": -574, "rotation": 0, "size": 100 },
+        { "type": "pine-tree", "x": 705, "y": 326, "rotation": 0, "size": 180 },
+        { "type": "pine-tree", "x": -128, "y": 647, "rotation": 0, "size": 140 },
+        { "type": "pine-tree", "x": 892, "y": -932, "rotation": 0, "size": 190 },
+        { "type": "pine-tree", "x": -243, "y": -312, "rotation": 0, "size": 110 },
+        { "type": "pine-tree", "x": 367, "y": -450, "rotation": 0, "size": 90 },
+        { "type": "pine-tree", "x": -846, "y": 804, "rotation": 0, "size": 170 },
+        { "type": "pine-tree", "x": 45, "y": -871, "rotation": 0, "size": 80 },
+        { "type": "pine-tree", "x": 398, "y": 542, "rotation": 0, "size": 130 },
+        { "type": "pine-tree", "x": -947, "y": -457, "rotation": 0, "size": 160 },
+        { "type": "pine-tree", "x": 123, "y": 346, "rotation": 0, "size": 70 },
+        { "type": "pine-tree", "x": 776, "y": -210, "rotation": 0, "size": 200 },
+        { "type": "pine-tree", "x": -509, "y": 501, "rotation": 0, "size": 115 },
+        { "type": "pine-tree", "x": 613, "y": 810, "rotation": 0, "size": 140 },
+        { "type": "pine-tree", "x": -112, "y": -618, "rotation": 0, "size": 125 },
+        { "type": "pine-tree", "x": 542, "y": -740, "rotation": 0, "size": 85 },
+        { "type": "pine-tree", "x": -789, "y": 75, "rotation": 0, "size": 95 },
+        { "type": "pine-tree", "x": 912, "y": -333, "rotation": 0, "size": 100 },
+        { "type": "pine-tree", "x": -63, "y": 892, "rotation": 0, "size": 60 },
+        { "type": "pine-tree", "x": 452, "y": 143, "rotation": 0, "size": 150 },
+        { "type": "pine-tree", "x": -364, "y": -950, "rotation": 0, "size": 110 },
+        { "type": "pine-tree", "x": 718, "y": 224, "rotation": 0, "size": 140 },
+        { "type": "pine-tree", "x": -856, "y": 642, "rotation": 0, "size": 130 },
+        { "type": "pine-tree", "x": 56, "y": 735, "rotation": 0, "size": 80 },
+        { "type": "pine-tree", "x": 601, "y": -512, "rotation": 0, "size": 200 },
+        { "type": "pine-tree", "x": -403, "y": 403, "rotation": 0, "size": 120 },
+        { "type": "pine-tree", "x": 299, "y": -98, "rotation": 0, "size": 90 },
+        { "type": "pine-tree", "x": -617, "y": 999, "rotation": 0, "size": 170 },
+        { "type": "pine-tree", "x": 880, "y": -798, "rotation": 0, "size": 110 },
+        { "type": "pine-tree", "x": -791, "y": -345, "rotation": 0, "size": 140 },
+        { "type": "pine-tree", "x": 444, "y": -642, "rotation": 0, "size": 190 },
+        { "type": "pine-tree", "x": -188, "y": 205, "rotation": 0, "size": 130 },
+        { "type": "pine-tree", "x": 715, "y": 417, "rotation": 0, "size": 150 },
+        { "type": "pine-tree", "x": -571, "y": -289, "rotation": 0, "size": 60 },
+        { "type": "pine-tree", "x": 83, "y": 912, "rotation": 0, "size": 100 },
+        { "type": "pine-tree", "x": -332, "y": -408, "rotation": 0, "size": 70 },
+        { "type": "pine-tree", "x": 391, "y": 233, "rotation": 0, "size": 180 },
+        { "type": "pine-tree", "x": -760, "y": 56, "rotation": 0, "size": 85 },
+        { "type": "pine-tree", "x": 256, "y": -619, "rotation": 0, "size": 110 },
+        { "type": "pine-tree", "x": -508, "y": 849, "rotation": 0, "size": 160 },
+        { "type": "pine-tree", "x": 189, "y": 47, "rotation": 0, "size": 125 },
+        { "type": "pine-tree", "x": 730, "y": -433, "rotation": 0, "size": 150 },
+        { "type": "pine-tree", "x": -420, "y": -687, "rotation": 0, "size": 90 },
+        { "type": "pine-tree", "x": 941, "y": 612, "rotation": 0, "size": 200 },
+        { "type": "pine-tree", "x": -871, "y": 339, "rotation": 0, "size": 140 },
+        { "type": "pine-tree", "x": 302, "y": -270, "rotation": 0, "size": 120 }
+    ]
 }

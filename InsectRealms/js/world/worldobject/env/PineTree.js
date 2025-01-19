@@ -3,7 +3,7 @@ import MapLoader from "../../MapLoader.js";
 import WorldObject from "../../WorldObject.js";
 
 class PineTree extends WorldObject {
-	static LAYERS = 10;
+	static LAYERS = 8;
 	static OFFSET_SCALE = 300;
 	static NOISE_OFFSET = 10;
 
@@ -51,30 +51,30 @@ class PineTree extends WorldObject {
 		ctx.fill();
 	}
 
-	draw (ctx, cx, cy, vw, vh) {
+	drawLayer (ctx, cx, cy, vw, vh, layer) {
+		if (layer >= PineTree.LAYERS) return;
+
 		const extendedVw = vw + this.width + PineTree.OFFSET_SCALE;
 		const extendedVh = vh + this.width + PineTree.OFFSET_SCALE;
 
-		for (let a = 0; a < PineTree.LAYERS; a++) {
-			ctx.fillStyle = this.colors[a];
-			const points = this.layers[a];
-			const layerDepthFactor = (a + 1) / PineTree.LAYERS;
-			const treeScreenX = this.position.x - cx;
-			const treeScreenY = this.position.y - cy;
-			const distanceToLeft = treeScreenX;
-			const distanceToRight = extendedVw - treeScreenX;
-			const distanceToTop = treeScreenY;
-			const distanceToBottom = extendedVh - treeScreenY;
-			const offsetX = layerDepthFactor * (distanceToLeft < distanceToRight ? -distanceToLeft / extendedVw : distanceToRight / extendedVw) * PineTree.OFFSET_SCALE;
-			const offsetY = layerDepthFactor * (distanceToTop < distanceToBottom ? -distanceToTop / extendedVh : distanceToBottom / extendedVh) * PineTree.OFFSET_SCALE;
+		ctx.fillStyle = this.colors[layer];
+		const points = this.layers[layer];
+		const layerDepthFactor = (layer + 1) / PineTree.LAYERS;
+		const treeScreenX = this.position.x - cx;
+		const treeScreenY = this.position.y - cy;
+		const distanceToLeft = treeScreenX;
+		const distanceToRight = extendedVw - treeScreenX;
+		const distanceToTop = treeScreenY;
+		const distanceToBottom = extendedVh - treeScreenY;
+		const offsetX = layerDepthFactor * (distanceToLeft < distanceToRight ? -distanceToLeft / extendedVw : distanceToRight / extendedVw) * PineTree.OFFSET_SCALE;
+		const offsetY = layerDepthFactor * (distanceToTop < distanceToBottom ? -distanceToTop / extendedVh : distanceToBottom / extendedVh) * PineTree.OFFSET_SCALE;
 
-			ctx.beginPath();
-			ctx.moveTo(this.position.x + points[0] - offsetX, this.position.y + points[1] - offsetY);
+		ctx.beginPath();
+		ctx.moveTo(this.position.x + points[0] - offsetX, this.position.y + points[1] - offsetY);
 
-			for (let b = 0; b < points.length; b += 2) ctx.lineTo(this.position.x + points[b] - offsetX, this.position.y + points[b + 1] - offsetY);
+		for (let b = 0; b < points.length; b += 2) ctx.lineTo(this.position.x + points[b] - offsetX, this.position.y + points[b + 1] - offsetY);
 
-			ctx.fill();
-		}
+		ctx.fill();
 	}
 }
 

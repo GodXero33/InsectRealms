@@ -3,6 +3,8 @@ import MapLoader from "./MapLoader.js";
 import WorldObject from "./WorldObject.js";
 
 class InsectWorld {
+	static MAX_LAYERS_COUNT = 10;
+
 	constructor (resources, mapData) {
 		this.resources = resources;
 		this.width = 0;
@@ -43,6 +45,9 @@ class InsectWorld {
 		this.camera.update(ctx);
 
 		this.drawableObjects = this.objects.filter(object => WorldObject.isInViewport(object, this.camera.position.x, this.camera.position.y, this.camera.scale, this.width, this.height));
+		const layeredObjects = this.drawableObjects.filter(object => object.isLayered);
+		const nonLayeredObjects = this.drawableObjects.filter(object => !object.isLayered);
+		const shadowCastingObjects = this.drawableObjects.filter(object => object.castShadow);
 		
 		if (this.debugMode) {
 			this.#drawGrid(ctx, 120);
@@ -51,14 +56,10 @@ class InsectWorld {
 			const cameraX = this.camera.position.x;
 			const cameraY = this.camera.position.y;
 
-			this.drawableObjects.forEach(object => { if (object.castShadow) object.drawShadow(ctx, '#00000088'); });
-			this.drawableObjects.forEach(object => {
-				if (object.isLayered) {
-					object.draw(ctx, cameraX, cameraY, this.width, this.height);
-				} else {
-					object.draw(ctx);
-				}
-			});
+			nonLayeredObjects.forEach(object => object.draw(ctx));
+			shadowCastingObjects.forEach(object => object.drawShadow(ctx, '#00000088'));
+			
+			for (let a = 0; a < InsectWorld.MAX_LAYERS_COUNT; a++) layeredObjects.forEach(object => object.drawLayer(ctx, cameraX, cameraY, this.width, this.height, a));
 		}
 
 		ctx.setTransform(transform);

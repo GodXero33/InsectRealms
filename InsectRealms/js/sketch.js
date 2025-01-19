@@ -7,7 +7,6 @@ import InsectWorld from './world/InsectWorld.js';
 	let fps = 0;
 	let width = 0;
 	let height = 0;
-	let isFirstCall = true;
 	
 	const simulationData = { FPS: 0, visibleObjects: 0 };
 
@@ -92,13 +91,6 @@ import InsectWorld from './world/InsectWorld.js';
 		canvas = document.getElementById('canvas');
 		ctx = canvas.getContext('2d');
 		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001'].objects);
-
-		if (!isFirstCall) {
-			resize();
-			return;
-		}
-
-		isFirstCall = false;
 		
 		console.log(insectWorld);
 		createGUI();
