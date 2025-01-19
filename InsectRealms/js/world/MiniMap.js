@@ -37,7 +37,7 @@ class MiniMap {
 		});
 
 		ctx.lineWidth = objPosScale * 100;
-		ctx.strokeRect(objOffsetX + this.world.camera.position.x * objPosScale - width * objPosScale * 0.5, objOffsetY + this.world.camera.position.y * objPosScale - height * objPosScale * 0.5, width * objPosScale, height * objPosScale);
+		ctx.strokeRect(objOffsetX + this.world.camera.position.x * objPosScale - width * objPosScale * 0.5 / this.world.camera.scale, objOffsetY + this.world.camera.position.y * objPosScale - height * objPosScale * 0.5 / this.world.camera.scale, width * objPosScale / this.world.camera.scale, height * objPosScale / this.world.camera.scale);
 
 		ctx.restore();
 	}
