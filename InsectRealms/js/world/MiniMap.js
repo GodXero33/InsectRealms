@@ -8,7 +8,7 @@ class MiniMap {
 		const maxDimension = Math.max(width, height);
 		const mapWidth = Math.min(0.2 * maxDimension, 250);
 		const mapHeight = mapWidth / this.asp;
-		const borderSize = maxDimension * 0.005;
+		const borderSize = maxDimension * 0.002;
 		const x = width - mapWidth - borderSize - 10;
 		const y = height - mapHeight - borderSize - 10;
 
@@ -17,7 +17,7 @@ class MiniMap {
 		ctx.strokeStyle = '#ffffff';
 		ctx.shadowColor = '#000000';
 		ctx.lineWidth = borderSize;
-		ctx.shadowBlur = 15;
+		ctx.shadowBlur = 10;
 
 		ctx.strokeRect(x - borderSize * 0.5, y - borderSize * 0.5, mapWidth + borderSize, mapHeight + borderSize);
 

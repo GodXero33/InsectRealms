@@ -68,7 +68,7 @@ class Segment {
 	}
 
 	draw (ctx) {
-		ctx.strokeStyle = '#fffffff';
+		ctx.strokeStyle = '#ffffff';
 		ctx.lineWidth = 5;
 		ctx.lineCap = 'round';
 		ctx.beginPath();

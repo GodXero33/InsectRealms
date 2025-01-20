@@ -2,6 +2,7 @@ import CameraMouseControl from './world/camera/CameraMouseControl.js';
 import CameraKeyControl from './world/camera/CameraKeyControl.js';
 import InsectWorld from './world/InsectWorld.js';
 import MiniMap from './world/MiniMap.js';
+import CameraTouchControl from './world/camera/CameraTouchControl.js';
 
 (function (exports) {
 	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay;
@@ -47,7 +48,7 @@ import MiniMap from './world/MiniMap.js';
 		update(dt);
 		statsDisplay.end();
 
-		simulationData.visibleObjects = insectWorld.drawableObjects.length;
+		// simulationData.visibleObjects = insectWorld.drawableObjects.length;
 		prevTime = now;
 
 		window.requestAnimationFrame(animate);
@@ -66,9 +67,9 @@ import MiniMap from './world/MiniMap.js';
 	function createGUI () {
 		gui = new dat.GUI();
 
-		const fpsFolder = gui.addFolder('Simulation Data');
-		fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
-		fpsFolder.open();
+		// const fpsFolder = gui.addFolder('Simulation Data');
+		// fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
+		// fpsFolder.open();
 
 		const worldSettingsFolder = gui.addFolder('World Settings');
 		const cameraFolder = worldSettingsFolder.addFolder('Camera');
@@ -106,6 +107,7 @@ import MiniMap from './world/MiniMap.js';
 
 		new CameraKeyControl(insectWorld.camera);
 		new CameraMouseControl(insectWorld.camera, canvas);
+		new CameraTouchControl(insectWorld.camera, 0.2, canvas);
 		
 		console.log(insectWorld);
 		createGUI();

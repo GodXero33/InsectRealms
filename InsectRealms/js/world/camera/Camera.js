@@ -12,6 +12,7 @@ class Camera {
 		this.zoomingFact = 0.1;
 		this.keyControl = null;
 		this.mouseControl = null;
+		this.touchControl = null;
 	}
 
 	update (ctx) {

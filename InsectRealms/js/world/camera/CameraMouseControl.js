@@ -4,7 +4,7 @@ class CameraMouseControl {
 	constructor (camera, canvas) {
 		this.camera = camera;
 		this.canvas = canvas;
-		this.mousedown = null;
+		this.mousedownPoint = null;
 
 		this.#initEvents();
 	}
@@ -21,20 +21,20 @@ class CameraMouseControl {
 		if (event.target != this.canvas) return;
 		
 		if (event.button == 0) {
-			this.mousedown = new Point(event.x + this.camera.position.x * this.camera.scale, event.y + this.camera.position.y * this.camera.scale);
+			this.mousedownPoint = new Point(event.x + this.camera.position.x * this.camera.scale, event.y + this.camera.position.y * this.camera.scale);
 		}
 	}
 
 	#mouseup (event) {
 		if (event.button == 0) {
-			this.mousedown = null;
+			this.mousedownPoint = null;
 		}
 	}
 
 	#mousemove (event) {
-		if (this.mousedown) {
-			this.camera.position.x = (this.mousedown.x - event.x) / this.camera.scale;
-			this.camera.position.y = (this.mousedown.y - event.y) / this.camera.scale;
+		if (this.mousedownPoint) {
+			this.camera.position.x = (this.mousedownPoint.x - event.x) / this.camera.scale;
+			this.camera.position.y = (this.mousedownPoint.y - event.y) / this.camera.scale;
 		}
 	}
 
