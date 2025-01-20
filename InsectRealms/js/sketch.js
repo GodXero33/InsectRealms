@@ -48,7 +48,7 @@ import CameraTouchControl from './world/camera/CameraTouchControl.js';
 		update(dt);
 		statsDisplay.end();
 
-		// simulationData.visibleObjects = insectWorld.drawableObjects.length;
+		simulationData.visibleObjects = insectWorld.drawableObjects.length;
 		prevTime = now;
 
 		window.requestAnimationFrame(animate);
@@ -67,9 +67,9 @@ import CameraTouchControl from './world/camera/CameraTouchControl.js';
 	function createGUI () {
 		gui = new dat.GUI();
 
-		// const fpsFolder = gui.addFolder('Simulation Data');
-		// fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
-		// fpsFolder.open();
+		const fpsFolder = gui.addFolder('Simulation Data');
+		fpsFolder.add(simulationData, 'visibleObjects').name('Visible Objects').listen();
+		fpsFolder.open();
 
 		const worldSettingsFolder = gui.addFolder('World Settings');
 		const cameraFolder = worldSettingsFolder.addFolder('Camera');

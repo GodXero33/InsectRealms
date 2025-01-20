@@ -193,13 +193,13 @@ class Segment {
 				const segment = new Segment(80 - a * 5 - i * 20, (i + 1) * 0.2 + (a + 1) * 0.5);
 				segment.parent = current;
 				
-				/* if (i == 0) {
+				if (i == 0) {
 					segment.maxAngle = (i + 1) * 0.2 + (a + 1) * 0.5 + 0.2;
 					segment.minAngle = Math.PI / 6;
 				} else {
 					segment.maxAngle = Math.PI / 3;
 					segment.minAngle = 0;
-				} */
+				}
 
 				current.child.push(segment);
 				current = segment;
@@ -208,8 +208,8 @@ class Segment {
 			}
 		}
 
-		// last.minAngle = 0;
-		// last.maxAngle = Math.PI / 6;
+		last.minAngle = 0;
+		last.maxAngle = Math.PI / 6;
 
 		tentacle.update();
 		console.log(tentacle);
