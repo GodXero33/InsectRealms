@@ -79,13 +79,13 @@ import PineTree from './world/worldobject/env/PineTree.js';
 		cameraFolder.add(insectWorld.camera, 'panningSpeed', 1, 10);
 		cameraFolder.add(insectWorld.camera, 'zoomingFact', 0.01, 0.5);
 
-		const actions = {
+		/* const actions = {
 			resetWorld: function () {
 				init(worldResources);
 			}
 		};
 
-		gui.add(actions, 'resetWorld').name('Reset World');
+		gui.add(actions, 'resetWorld').name('Reset World'); */
 
 		worldSettingsFolder.open();
 		cameraFolder.open();
