@@ -9,8 +9,8 @@ class MapLoader {
 		if (object.type == 'pine-tree') return new PineTree(object, generateQuality);
 	}
 
-	static load (map, data, generateQuality = MapLoader.GENERATE_QUALITY_LOW) {
-		data.forEach(object => map.objects.push(MapLoader.#generateObject(object, generateQuality)));
+	static load (world, data, generateQuality = MapLoader.GENERATE_QUALITY_LOW) {
+		data.forEach(object => world.objects.push(MapLoader.#generateObject(object, generateQuality)));
 	}
 }
 

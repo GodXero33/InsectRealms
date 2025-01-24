@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pine Trees Generator</title>
+</head>
+<body>
+    <h1>Pine Tree Generator</h1>
+    <button onclick="generatePineTrees()">Generate Pine Trees</button>
+    <pre id="output"></pre>
+
+    <script>
+        function generatePineTrees() {
+            const trees = [];
+            const sizes = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220];
+            const scale = 10000;
+            const count = 2000;
+            for (let i = 0; i < count; i++) {
+                const x = Math.floor(Math.random() * scale + 1) - scale / 2; // Range: -10000 to 10000
+                const y = Math.floor(Math.random() * scale + 1) - scale / 2; // Range: -10000 to 10000
+                const size = sizes[Math.floor(Math.random() * sizes.length)]; // Size: Between 60 and 210
+                const rotation = 0; // Rotation fixed as 0, can be random if needed
+
+                trees.push({
+                    type: "pine-tree",
+                    x: x,
+                    y: y,
+                    rotation: rotation,
+                    size: size
+                });
+            }
+
+            const formattedJson = JSON.stringify({ objects: trees }, null, "\t");
+            document.getElementById("output").textContent = formattedJson;
+        }
+    </script>
+</body>
+</html>

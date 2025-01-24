@@ -1,0 +1,48 @@
+{
+	"completed": [
+		{
+			"date": "unknown",
+			"category": "Optimization",
+			"title": "Calculate if the object is in viewport or not. Only viewport objects are drawn.",
+			"details": [
+				"Implemented a system to calculate whether objects are inside the viewport. This avoids unnecessary rendering of off-screen elements, improving performance."
+			]
+		},
+		{
+			"date": "2025/01/24",
+			"category": "Optimization",
+			"title": "Optimized the Pine Tree Class",
+			"details": [
+				"Implemented pre-rendering for all pine tree layers and stored the rendered images in an array. During drawing, pre-rendered images are used instead of recalculating points and redrawing each frame. This significantly reduces CPU usage.",
+				"Added a mechanism to check if a pine tree with the same size has already been generated. If a matching size is found, the current tree references the pre-rendered images of the existing tree, reducing memory usage."
+			]
+		}
+	],
+	"pending": [
+		{
+			"category": "Environment Design",
+			"title": "Add Water Areas",
+			"details": [
+				"Add water areas to the world.",
+				"Create water rippling effects.",
+				"Implement real-time updates when creatures interact with water areas."
+			]
+		},
+		{
+			"category": "Bug Fix",
+			"title": "Camera and Touch Controls Going Out of Bounds",
+			"details": [
+				"When exploring the world using key controls, the explorer cannot go out of bounds. However, with touch and mouse controls, the explorer can travel infinitely."
+			]
+		},
+		{
+			"category": "Quality of Life",
+			"title": "Improve Water Interaction and Effects",
+			"details": [
+				"Enhance the water interaction system to ensure objects and creatures behave realistically when in contact with water.",
+				"Refine water surface effects, such as waves and ripples, for a more immersive visual experience.",
+				"Add water splashing effects when creatures or objects move through water."
+			]
+		}
+	]
+}

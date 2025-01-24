@@ -57,7 +57,7 @@ class InsectWorld {
 			const cameraY = this.camera.position.y;
 
 			nonLayeredObjects.forEach(object => object.draw(ctx));
-			shadowCastingObjects.forEach(object => object.drawShadow(ctx, '#00000088'));
+			shadowCastingObjects.forEach(object => object.drawShadow(ctx, 0.5));
 			
 			for (let a = 0; a < InsectWorld.MAX_LAYERS_COUNT; a++) layeredObjects.forEach(object => object.drawLayer(ctx, cameraX, cameraY, this.width, this.height, a));
 		}

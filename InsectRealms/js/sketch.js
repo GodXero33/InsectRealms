@@ -3,12 +3,12 @@ import CameraKeyControl from './world/camera/CameraKeyControl.js';
 import InsectWorld from './world/InsectWorld.js';
 import MiniMap from './world/MiniMap.js';
 import CameraTouchControl from './world/camera/CameraTouchControl.js';
+import PineTree from './world/worldobject/env/PineTree.js';
 
 (function (exports) {
 	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay;
 	let playing = false;
 	let prevTime = 0;
-	let fps = 0;
 	let width = 0;
 	let height = 0;
 	
@@ -109,7 +109,7 @@ import CameraTouchControl from './world/camera/CameraTouchControl.js';
 		new CameraMouseControl(insectWorld.camera, canvas);
 		new CameraTouchControl(insectWorld.camera, 0.2, canvas);
 		
-		console.log(insectWorld);
+		console.log(insectWorld, PineTree.generated, PineTree.instances.length);
 		createGUI();
 		createStatsDisplay();
 		window.addEventListener('resize', resize);
