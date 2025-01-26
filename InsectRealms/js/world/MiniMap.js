@@ -2,33 +2,44 @@ class MiniMap {
 	constructor (world) {
 		this.world = world;
 		this.asp = this.world.worldWidth / this.world.worldHeight;
+		this.canvas = null;
+		this.ctx = null;
+		this.mapImage = null;
+		this.width = 1;
+		this.height = 1;
+
+		this.#createDOM();
+		this.#generateStaticImage();
+		console.log(this);
 	}
 
-	draw (ctx, width, height) {
-		const maxDimension = Math.max(width, height);
-		const mapWidth = Math.min(0.2 * maxDimension, 250);
-		const mapHeight = mapWidth / this.asp;
-		const borderSize = maxDimension * 0.002;
-		const x = width - mapWidth - borderSize - 10;
-		const y = height - mapHeight - borderSize - 10;
+	#createDOM () {
+		this.canvas = document.createElement('canvas');
+		this.ctx = this.canvas.getContext('2d');
 
-		ctx.save();
+		this.canvas.style = 'position: absolute; width: clamp(200px, 20%, 350px); aspect-ratio: ' + this.world.worldWidth + ' / ' + this.world.worldHeight + '; bottom: 10px; right: 10px; z-index: 200; filter: drop-shadow(0 0 5px #000000); border: 2px solid #aaaaaa;';
 
-		ctx.strokeStyle = '#ffffff';
-		ctx.shadowColor = '#000000';
-		ctx.lineWidth = borderSize;
-		ctx.shadowBlur = 10;
+		this.resize();
+		document.body.appendChild(this.canvas);
+	}
 
-		ctx.strokeRect(x - borderSize * 0.5, y - borderSize * 0.5, mapWidth + borderSize, mapHeight + borderSize);
+	#generateStaticImage () {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
 
-		ctx.shadowBlur = 0;
+		const width = 1024;
+		const height = this.asp * 1024;
+
+		canvas.width = width;
+		canvas.height = height;
+
 		ctx.fillStyle = '#000000';
 
-		ctx.fillRect(x, y, mapWidth, mapHeight);
+		ctx.fillRect(0, 0, width, height);
 
-		const objOffsetX = x + mapWidth * 0.5;
-		const objOffsetY = y + mapHeight * 0.5;
-		const objPosScale = mapWidth / this.world.worldWidth;
+		const objOffsetX = width * 0.5;
+		const objOffsetY = height * 0.5;
+		const objPosScale = width / this.world.worldWidth;
 
 		this.world.objects.forEach(object => {
 			ctx.fillStyle = object.miniMapColor;
@@ -36,8 +47,42 @@ class MiniMap {
 			ctx.fillRect(objOffsetX + object.position.x * objPosScale, objOffsetY + object.position.y * objPosScale, object.width * objPosScale, object.height * objPosScale)
 		});
 
+		const img = new Image();
+
+		img.src = canvas.toDataURL();
+		this.mapImage = img;
+	}
+
+	resize () {
+		this.width = this.canvas.clientWidth;
+		this.height = this.canvas.clientHeight;
+		this.canvas.width  =this.width;
+		this.canvas.height = this.height;
+	}
+
+	draw (screenWidth, screenHeight) {
+		const width = this.width;
+		const height = this.height;
+		const ctx = this.ctx;
+		const maxDimension = Math.max(screenWidth, screenHeight);
+		const mapWidth = Math.min(0.2 * maxDimension, 250);
+		const mapHeight = mapWidth / this.asp;
+		const borderSize = maxDimension * 0.002;
+		const x = width - mapWidth - borderSize - 10;
+		const y = height - mapHeight - borderSize - 10;
+
+		ctx.clearRect(0, 0, width, height);
+
+		const objOffsetX = mapWidth * 0.5;
+		const objOffsetY = mapHeight * 0.5;
+		const objPosScale = mapWidth / this.world.worldWidth;
+
+		ctx.drawImage(this.mapImage, 0, 0, width, height);
+
+		ctx.strokeStyle = '#ffffff';
 		ctx.lineWidth = objPosScale * 100;
-		ctx.strokeRect(objOffsetX + this.world.camera.position.x * objPosScale - width * objPosScale * 0.5 / this.world.camera.scale, objOffsetY + this.world.camera.position.y * objPosScale - height * objPosScale * 0.5 / this.world.camera.scale, width * objPosScale / this.world.camera.scale, height * objPosScale / this.world.camera.scale);
+
+		ctx.strokeRect(objOffsetX + this.world.camera.position.x * objPosScale - screenWidth * objPosScale * 0.5 / this.world.camera.scale, objOffsetY + this.world.camera.position.y * objPosScale - screenHeight * objPosScale * 0.5 / this.world.camera.scale, screenWidth * objPosScale / this.world.camera.scale, screenHeight * objPosScale / this.world.camera.scale);
 
 		ctx.restore();
 	}

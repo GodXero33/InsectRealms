@@ -19,7 +19,7 @@ import PineTree from './world/worldobject/env/PineTree.js';
 
 		ctx.fillRect(0, 0, width, height);
 		insectWorld.render(ctx, width, height);
-		miniMap.draw(ctx, width, height);
+		miniMap.draw(width, height);
 	}
 
 	function update (dt) {
@@ -33,6 +33,7 @@ import PineTree from './world/worldobject/env/PineTree.js';
 		canvas.height = height;
 
 		insectWorld.resize(width, height);
+		miniMap.resize();
 		draw();
 	}
 
