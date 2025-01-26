@@ -16,6 +16,17 @@
 				"Implemented pre-rendering for all pine tree layers and stored the rendered images in an array. During drawing, pre-rendered images are used instead of recalculating points and redrawing each frame. This significantly reduces CPU usage.",
 				"Added a mechanism to check if a pine tree with the same size has already been generated. If a matching size is found, the current tree references the pre-rendered images of the existing tree, reducing memory usage."
 			]
+		},
+		{
+			"date": "2025/01/26",
+			"category": "Optimization",
+			"title": "Minimap Rendering Refactor and Separate Events",
+			"details": [
+				"Separated the minimap rendering onto a new dedicated canvas element, distinct from the main simulation canvas.",
+				"Pre-rendered non-movable objects on the minimap to avoid redundant calculations and improve performance.",
+				"Implemented real-time updates for movable objects on the minimap canvas, ensuring accurate representation of the simulation state.",
+				"Enabled the addition of separate minimap-specific events, such as dragging the viewport rectangle to adjust the world camera position."
+			]
 		}
 	],
 	"pending": [
@@ -43,6 +54,23 @@
 				"Refine water surface effects, such as waves and ripples, for a more immersive visual experience.",
 				"Add water splashing effects when creatures or objects move through water."
 			]
+		},
+		{
+			"category": "Quality of Life",
+			"title": "Minimap Event for Camera Positioning",
+			"details": [
+				"Allow users to click and drag the rectangle representing the current viewport on the minimap. Moving the rectangle adjusts the world camera's position proportionally to the minimap-to-world size ratio."
+			]
+		},
+		{
+			"category": "Environment Design",
+			"title": "World Boundary Concealment",
+			"details": [
+				"Design and implement a method to visually conceal the edges of the world to maintain immersion, such as adding dense forests, clouds, or other natural elements.",
+				"Ensure the chosen solution aligns with the theme of the 'Insect Realm,' creating a cohesive and believable environment.",
+				"Consider performance and resource usage while designing the boundary concealment to avoid impacting overall simulation efficiency."
+			]
 		}
+		
 	]
 }

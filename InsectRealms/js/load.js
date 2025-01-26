@@ -39,7 +39,7 @@
 				if (!response.ok) {
 					resourceLoadOk(URL, false);
 					res({ ok: false, error: 'failed to fetch: ' + URL, name });
-					return;
+					throw new Error('Failed to fetch json data.');
 				}
 
 				const json = await response.json();
@@ -86,7 +86,7 @@
 		try {
 			const response = await fetch('res/resources.json');
 
-			if (!response.ok) return;
+			if (!response.ok) throw new Error('Failed to fetch resource map.');
 
 			resourcesMap = await response.json();
 			loadResources();
