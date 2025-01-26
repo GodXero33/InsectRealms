@@ -1,11 +1,10 @@
 import Camera from "./camera/Camera.js";
-import MapLoader from "./MapLoader.js";
 import WorldObject from "./WorldObject.js";
 
 class InsectWorld {
 	static MAX_LAYERS_COUNT = 10;
 
-	constructor (resources, mapData) {
+	constructor (resources) {
 		this.resources = resources;
 		this.width = 0;
 		this.height = 0;
@@ -16,8 +15,6 @@ class InsectWorld {
 		this.worldHeight = 10000;
 		this.objects = [];
 		this.drawableObjects = [];
-
-		MapLoader.load(this, mapData, 2);
 	}
 
 	#drawGrid (ctx, cellSize = 50) {

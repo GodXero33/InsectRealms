@@ -66,7 +66,9 @@
 			
 			if (response.ok) loadedResourcesMap.resources[response.name] = response.res;
 
-			console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
+			// console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
+
+			window['load-progress-controller'].loadResource(loadedResources.length, resourcesCount);
 		}
 
 		for (let a = 0; a < resourcesMap.maps.length; a++) {
@@ -75,10 +77,11 @@
 			
 			if (response.ok) loadedResourcesMap.maps[response.name] = response.res;
 
-			console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
+			// console.log('load' + (response.ok ? 'ed' : ' failed') + ': ' + response.name + '\nprogress: ' + (loadedResources.length * 100 / resourcesCount).toFixed(2) + ' %');
+
+			window['load-progress-controller'].loadResource(loadedResources.length, resourcesCount);
 		}
 
-		console.log(loadedResourcesMap);
 		window['INSECT_REALM'].init(loadedResourcesMap);
 	}
 

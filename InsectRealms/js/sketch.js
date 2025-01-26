@@ -4,6 +4,7 @@ import InsectWorld from './world/InsectWorld.js';
 import MiniMap from './world/MiniMap.js';
 import CameraTouchControl from './world/camera/CameraTouchControl.js';
 import PineTree from './world/worldobject/env/PineTree.js';
+import MapLoader from './world/MapLoader.js';
 
 (function (exports) {
 	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay;
@@ -103,16 +104,20 @@ import PineTree from './world/worldobject/env/PineTree.js';
 		worldResources = resources;
 		canvas = document.getElementById('canvas');
 		ctx = canvas.getContext('2d');
-		insectWorld = new InsectWorld(worldResources.resources, worldResources.maps['M0001'].objects);
+		insectWorld = new InsectWorld(worldResources.resources);
 		miniMap = new MiniMap(insectWorld);
 
 		new CameraKeyControl(insectWorld.camera);
 		new CameraMouseControl(insectWorld.camera, canvas);
 		new CameraTouchControl(insectWorld.camera, 0.2, canvas);
-		
-		console.log(insectWorld, PineTree.generated, PineTree.instances.length);
+
+		window['load-progress-controller'].generateMapStart();
+		MapLoader.load(insectWorld, worldResources.maps['M0001'].objects, 2);
+		window['load-progress-controller'].generatedMap();
+		miniMap.generateStaticImage();
 		createGUI();
 		createStatsDisplay();
+
 		window.addEventListener('resize', resize);
 		window.addEventListener('keydown', (event) => {
 			if (event.code == 'Space') (playing ? pause : play)();
@@ -121,6 +126,8 @@ import PineTree from './world/worldobject/env/PineTree.js';
 
 		resize();
 		play();
+
+		console.log(insectWorld, PineTree.generated, PineTree.instances.length, resources);
 	}
 
 	exports.init = init;

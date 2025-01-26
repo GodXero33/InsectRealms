@@ -9,8 +9,6 @@ class MiniMap {
 		this.height = 1;
 
 		this.#createDOM();
-		this.#generateStaticImage();
-		console.log(this);
 	}
 
 	#createDOM () {
@@ -23,7 +21,7 @@ class MiniMap {
 		document.body.appendChild(this.canvas);
 	}
 
-	#generateStaticImage () {
+	generateStaticImage () {
 		const canvas = document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 
