@@ -104,8 +104,8 @@ import MapLoader from './world/MapLoader.js';
 		document.body.appendChild(statsDisplay.dom);
 	}
 
-	function initGeneratingSimulation () {
-		MapLoader.load(insectWorld, worldResources.maps['M0001'].objects, 2);
+	async function initGeneratingSimulation () {
+		await MapLoader.load(insectWorld, worldResources.maps['M0001'].objects, 2);
 		window['load-progress-controller'].generateMapEnd();
 		miniMap.generateStaticImage();
 		createGUI();
@@ -118,10 +118,17 @@ import MapLoader from './world/MapLoader.js';
 		});
 
 		resize();
-		play();
-		window['insect_realms_doms'].loader.classList.add('hide');
 
-		console.log(insectWorld, PineTree.generated, PineTree.instances.length);
+		window['insect_realms_doms'].loadingStateTitle.textContent = 'Click to continue';
+
+		window.addEventListener('click', () => {
+			window['insect_realms_doms'].loader.classList.add('hide');
+			play();
+		}, { once: true });
+
+		document.body.click();
+		console.log(insectWorld);
+		console.log(`Generated Trees: ${PineTree.generated} | Total Trees: ${PineTree.instances.length}`);
 	}
 
 	function init (resources) {
