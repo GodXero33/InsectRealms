@@ -92,11 +92,25 @@
 			if (!response.ok) throw new Error('Failed to fetch resource map.');
 
 			resourcesMap = await response.json();
+			window['insect_realms_doms'].loadingStateTitle.textContent = 'Downloading world resources...';
+
 			loadResources();
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
-	loadResourceMap();
+	function createGlobals () {
+		window['insect_realms_doms'] = {
+			mainContainer: document.getElementById('main-container'),
+			loadingStateTitle: document.getElementById('loading-state-title'),
+			loadingProgressbar: document.getElementById('loading-progress'),
+			loader: document.getElementById('loading-screen')
+		};
+	}
+
+	window.addEventListener('DOMContentLoaded', () => {
+		createGlobals();
+		loadResourceMap();
+	});
 })();

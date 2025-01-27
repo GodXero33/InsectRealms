@@ -9,6 +9,7 @@ class CameraKeyControl {
 		this.turnRight = false; */
 		this.zoomIn = false;
 		this.zoomOut = false;
+		this.isEnabled = false;
 
 		this.camera.keyControl = this;
 
@@ -21,6 +22,8 @@ class CameraKeyControl {
 	}
 
 	#keydown (event) {
+		if (!this.isEnabled) return;
+
 		const code = event.code;
 
 		if (code == 'KeyW') {
@@ -107,6 +110,8 @@ class CameraKeyControl {
 	}
 
 	update () {
+		if (!this.isEnabled) return;
+		
 		const camera = this.camera;
 		const movementSpeed = camera.panningSpeed;
 		// const rotationSpeed = 0.01;

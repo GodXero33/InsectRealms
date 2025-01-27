@@ -7,7 +7,7 @@ import PineTree from './world/worldobject/env/PineTree.js';
 import MapLoader from './world/MapLoader.js';
 
 (function (exports) {
-	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay;
+	let canvas, ctx, insectWorld, miniMap, worldResources, gui, statsDisplay, mapControls;
 	let playing = false;
 	let prevTime = 0;
 	let width = 0;
@@ -60,10 +60,14 @@ import MapLoader from './world/MapLoader.js';
 		playing = true;
 		prevTime = window.performance.now();
 		animate();
+
+		mapControls.forEach(control => control.isEnabled = true);
 	}
 
 	function pause () {
 		playing = false;
+
+		mapControls.forEach(control => control.isEnabled = false);
 	}
 
 	function createGUI () {
@@ -100,20 +104,9 @@ import MapLoader from './world/MapLoader.js';
 		document.body.appendChild(statsDisplay.dom);
 	}
 
-	function init (resources) {
-		worldResources = resources;
-		canvas = document.getElementById('canvas');
-		ctx = canvas.getContext('2d');
-		insectWorld = new InsectWorld(worldResources.resources);
-		miniMap = new MiniMap(insectWorld);
-
-		new CameraKeyControl(insectWorld.camera);
-		new CameraMouseControl(insectWorld.camera, canvas);
-		new CameraTouchControl(insectWorld.camera, 0.2, canvas);
-
-		window['load-progress-controller'].generateMapStart();
+	function initGeneratingSimulation () {
 		MapLoader.load(insectWorld, worldResources.maps['M0001'].objects, 2);
-		window['load-progress-controller'].generatedMap();
+		window['load-progress-controller'].generateMapEnd();
 		miniMap.generateStaticImage();
 		createGUI();
 		createStatsDisplay();
@@ -126,8 +119,28 @@ import MapLoader from './world/MapLoader.js';
 
 		resize();
 		play();
+		window['insect_realms_doms'].loader.classList.add('hide');
 
-		console.log(insectWorld, PineTree.generated, PineTree.instances.length, resources);
+		console.log(insectWorld, PineTree.generated, PineTree.instances.length);
+	}
+
+	function init (resources) {
+		worldResources = resources;
+		canvas = document.getElementById('canvas');
+		ctx = canvas.getContext('2d');
+		insectWorld = new InsectWorld(worldResources.resources);
+		miniMap = new MiniMap(insectWorld);
+
+		mapControls = [
+			new CameraKeyControl(insectWorld.camera),
+			new CameraMouseControl(insectWorld.camera, canvas),
+			new CameraTouchControl(insectWorld.camera, 0.2, canvas)
+		];
+
+		window['load-progress-controller'].generateMapStart();
+		
+		setTimeout(initGeneratingSimulation, 200);
+		console.log(resources);
 	}
 
 	exports.init = init;

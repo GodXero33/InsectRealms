@@ -5,6 +5,7 @@ class CameraMouseControl {
 		this.camera = camera;
 		this.canvas = canvas;
 		this.mousedownPoint = null;
+		this.isEnabled = false;
 
 		this.#initEvents();
 	}
@@ -18,7 +19,7 @@ class CameraMouseControl {
 	}
 
 	#mousedown (event) {
-		if (event.target != this.canvas) return;
+		if (event.target != this.canvas || !this.isEnabled) return;
 		
 		if (event.button == 0) {
 			this.mousedownPoint = new Point(event.x + this.camera.position.x * this.camera.scale, event.y + this.camera.position.y * this.camera.scale);
@@ -32,6 +33,8 @@ class CameraMouseControl {
 	}
 
 	#mousemove (event) {
+		if (!this.isEnabled) return;
+
 		if (this.mousedownPoint) {
 			this.camera.position.x = (this.mousedownPoint.x - event.x) / this.camera.scale;
 			this.camera.position.y = (this.mousedownPoint.y - event.y) / this.camera.scale;
@@ -39,6 +42,8 @@ class CameraMouseControl {
 	}
 
 	#wheel (event) {
+		if (!this.isEnabled) return;
+		
 		const newScale = this.camera.scale * (1 + this.camera.zoomingFact * Math.sign(event.deltaY));
 		this.camera.scale = newScale < this.camera.minZoom ? this.camera.minZoom : newScale > this.camera.maxZoom ? this.camera.maxZoom : newScale;
 	}

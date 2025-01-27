@@ -7,6 +7,7 @@ class CameraTouchControl {
 		this.canvas = canvas;
 		this.touchdownPoint = null;
 		this.pinchZoomStart = null;
+		this.isEnabled = false;
 
 		this.#initEvents();
 	}
@@ -20,7 +21,7 @@ class CameraTouchControl {
 	}
 
 	#touchstart (event) {
-		if (event.target != this.canvas) return;
+		if (event.target != this.canvas || !this.isEnabled) return;
 
 		event.preventDefault();
 		
@@ -46,7 +47,7 @@ class CameraTouchControl {
 	}
 
 	#touchmove (event) {
-		if (event.target != this.canvas) return;
+		if (event.target != this.canvas || !this.isEnabled) return;
 		
 		event.preventDefault();
 		

@@ -4,7 +4,10 @@ class LoadProgressController {
 	}
 
 	log (currentProgress, processStep) {
-		console.log(currentProgress * processStep * 100 / this.totalSteps);
+		const progress = currentProgress * processStep * 100 / this.totalSteps;
+		window['insect_realms_doms'].loadingProgressbar.style.width = progress + '%';
+
+		console.log(progress);
 	}
 
 	loadResource (current, length) {
@@ -12,11 +15,13 @@ class LoadProgressController {
 	}
 
 	generateMapStart () {
+		window['insect_realms_doms'].loadingStateTitle.textContent = 'Generating Map...';
+
 		console.log('Generating map');
 		this.log(1, 1);
 	}
 
-	generatedMap () {
+	generateMapEnd () {
 		console.log('Map generated');
 		this.log(1, 2);
 	}
