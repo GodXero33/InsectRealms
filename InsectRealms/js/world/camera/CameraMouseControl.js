@@ -35,9 +35,20 @@ class CameraMouseControl {
 	#mousemove (event) {
 		if (!this.isEnabled) return;
 
+		const camera = this.camera;
+		const canvasWidth = camera.world.width;
+		const canvasHeight = camera.world.height;
+		const worldWidth = camera.world.worldWidth;
+		const worldHeight = camera.world.worldHeight;
+
 		if (this.mousedownPoint) {
-			this.camera.position.x = (this.mousedownPoint.x - event.x) / this.camera.scale;
-			this.camera.position.y = (this.mousedownPoint.y - event.y) / this.camera.scale;
+			camera.position.x = (this.mousedownPoint.x - event.x) / camera.scale;
+			camera.position.y = (this.mousedownPoint.y - event.y) / camera.scale;
+
+			if (camera.position.x < (canvasWidth - worldWidth) / 2) camera.position.x = (canvasWidth - worldWidth) / 2;
+			if (camera.position.y < (canvasHeight - worldHeight) / 2) camera.position.y = (canvasHeight - worldHeight) / 2;
+			if (camera.position.x > (worldWidth - canvasWidth) / 2) camera.position.x = (worldWidth - canvasWidth) / 2;
+			if (camera.position.y > (worldHeight - canvasHeight) / 2) camera.position.y = (worldHeight - canvasHeight) / 2;
 		}
 	}
 

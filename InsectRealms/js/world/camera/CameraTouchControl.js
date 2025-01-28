@@ -50,11 +50,22 @@ class CameraTouchControl {
 		if (event.target != this.canvas || !this.isEnabled) return;
 		
 		event.preventDefault();
+
+		const camera = this.camera;
+		const canvasWidth = camera.world.width;
+		const canvasHeight = camera.world.height;
+		const worldWidth = camera.world.worldWidth;
+		const worldHeight = camera.world.worldHeight;
 		
 		if (event.touches.length == 1 && this.touchdownPoint) {
 			const touch = event.touches[0];
-			this.camera.position.x = (this.touchdownPoint.x - touch.clientX) / this.camera.scale;
-			this.camera.position.y = (this.touchdownPoint.y - touch.clientY) / this.camera.scale;
+			camera.position.x = (this.touchdownPoint.x - touch.clientX) / camera.scale;
+			camera.position.y = (this.touchdownPoint.y - touch.clientY) / camera.scale;
+
+			if (camera.position.x < (canvasWidth - worldWidth) / 2) camera.position.x = (canvasWidth - worldWidth) / 2;
+			if (camera.position.y < (canvasHeight - worldHeight) / 2) camera.position.y = (canvasHeight - worldHeight) / 2;
+			if (camera.position.x > (worldWidth - canvasWidth) / 2) camera.position.x = (worldWidth - canvasWidth) / 2;
+			if (camera.position.y > (worldHeight - canvasHeight) / 2) camera.position.y = (worldHeight - canvasHeight) / 2;
 		}
 
 		if (event.touches.length == 2 && this.pinchZoomStart) {
@@ -65,8 +76,8 @@ class CameraTouchControl {
 			const dist2 = (touch1.clientX - touch2.clientX) ** 2 + (touch1.clientY - touch2.clientY) ** 2;
 			const deltaDist = dist2 - dist1;
 
-			const newScale = this.camera.scale * (1 + this.camera.zoomingFact * Math.sign(deltaDist) * this.pinchZoomFact);
-			this.camera.scale = newScale < this.camera.minZoom ? this.camera.minZoom : newScale > this.camera.maxZoom ? this.camera.maxZoom : newScale;
+			const newScale = camera.scale * (1 + camera.zoomingFact * Math.sign(deltaDist) * this.pinchZoomFact);
+			camera.scale = newScale < camera.minZoom ? camera.minZoom : newScale > camera.maxZoom ? camera.maxZoom : newScale;
 
 			this.pinchZoomStart.p1.x = touch1.clientX;
 			this.pinchZoomStart.p1.y = touch1.clientY;

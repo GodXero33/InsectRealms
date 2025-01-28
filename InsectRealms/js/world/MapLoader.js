@@ -16,7 +16,7 @@ class MapLoader {
 			for (let a = 0; a < length; a++) {
 				world.objects.push(MapLoader.#generateObject(data[a], generateQuality));
 				window['load-progress-controller'].generateMapProgress(a + 1, length);
-				await new Promise(resolve => setTimeout(resolve, 0));
+				// await new Promise(resolve => setTimeout(resolve, 0));
 			}
 
 			res();
