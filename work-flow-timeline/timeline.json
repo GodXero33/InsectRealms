@@ -27,6 +27,15 @@
 				"Implemented real-time updates for movable objects on the minimap canvas, ensuring accurate representation of the simulation state.",
 				"Enabled the addition of separate minimap-specific events, such as dragging the viewport rectangle to adjust the world camera position."
 			]
+		},
+		{
+			"date": "2025/01/28",
+			"category": "Bug Fix",
+			"title": "Mouse and Touch Controls Going Out of Bounds",
+			"details": [
+				"Resolved an issue where the explorer could travel infinitely when using mouse or touch controls, even though keyboard controls respected world boundaries.",
+				"Implemented boundary checks for mouse and touch inputs to ensure consistent behavior across all control methods."
+			]
 		}
 	],
 	"pending": [
@@ -37,13 +46,6 @@
 				"Add water areas to the world.",
 				"Create water rippling effects.",
 				"Implement real-time updates when creatures interact with water areas."
-			]
-		},
-		{
-			"category": "Bug Fix",
-			"title": "Camera and Touch Controls Going Out of Bounds",
-			"details": [
-				"When exploring the world using key controls, the explorer cannot go out of bounds. However, with touch and mouse controls, the explorer can travel infinitely."
 			]
 		},
 		{
