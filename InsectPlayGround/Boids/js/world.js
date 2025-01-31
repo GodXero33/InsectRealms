@@ -244,7 +244,7 @@ class Flock {
 
 	draw (ctx) {
 		ctx.fillStyle = this.color;
-		ctx.strokeStyle = '#ffffff';
+		ctx.strokeStyle = '#565656';
 
 		this.boids.forEach(boid => boid.draw(ctx));
 	}
@@ -262,9 +262,9 @@ class World {
 		this.width = 800;
 		this.height = 800;
 		this.flocks = [
-			new Flock(100, '#070', this.width, this.height),
-			new Flock(100, '#077', this.width, this.height),
-			new Flock(10, '#700', this.width, this.height)
+			new Flock(100, '#0a0', this.width, this.height),
+			new Flock(100, '#0aa', this.width, this.height),
+			new Flock(10, '#a00', this.width, this.height)
 		];
 
 		this.flocks[0].predatorFlock = this.flocks[2];
