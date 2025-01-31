@@ -118,9 +118,10 @@ class Boid {
 		this.position = new Vector((Math.random() - 0.5) * w, (Math.random() - 0.5) * h);
 		this.velocity = new Vector().randomize().setLength(Math.random() * 1 + 0.5);
 		this.acceleration = new Vector();
-		this.maxForce = 0.2;
+		this.maxForce = 0.1;
 		this.maxSpeed = 2;
 		this.perceptionRadius = 50;
+		this.edgeSteering = 0.1;
 	}
 
 	draw (ctx) {
@@ -147,10 +148,10 @@ class Boid {
 	}
 
 	edges (w, h) {
-		if (this.position.x > w * 0.5) this.position.x = -w * 0.5;
-		if (this.position.x < -w * 0.5) this.position.x = w * 0.5;
-		if (this.position.y > h * 0.5) this.position.y = -h * 0.5;
-		if (this.position.y < -h * 0.5) this.position.y = h * 0.5;
+		if (this.position.x > w * 0.5) this.velocity.x -= this.edgeSteering;
+		if (this.position.x < -w * 0.5) this.velocity.x += this.edgeSteering;
+		if (this.position.y > h * 0.5) this.velocity.y -= this.edgeSteering;
+		if (this.position.y < -h * 0.5) this.velocity.y += this.edgeSteering;
 	}
 
 	align (boids) {
@@ -221,17 +222,10 @@ class World {
 	}
 
 	draw (ctx) {
-		ctx.fillStyle = '#134523';
-		ctx.fillRect(-this.width * 0.5, -this.height * 0.5, this.width, this.height);
-
 		ctx.fillStyle = '#000000';
 		ctx.strokeStyle = '#88ff88';
-		ctx.lineWidth = 1;
 
 		this.flock.forEach(boid => boid.draw(ctx));
-
-		ctx.lineWidth = 20;
-		ctx.strokeRect(-this.width * 0.5, -this.height * 0.5, this.width, this.height);
 	}
 
 	update () {
