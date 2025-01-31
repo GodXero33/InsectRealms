@@ -119,8 +119,8 @@ class Boid {
 		this.velocity = new Vector().randomize().setLength(Math.random() * 1 + 0.5);
 		this.acceleration = new Vector();
 		this.maxForce = 0.1;
-		this.maxSpeed = 2;
-		this.perceptionRadius = 50;
+		this.maxSpeed = 5;
+		this.perceptionRadius = 100;
 		this.edgeSteering = 0.1;
 	}
 
@@ -200,8 +200,28 @@ class Boid {
 		return total == 0 ? steering : steering.divScalar(total).setLength(this.maxSpeed).sub(this.velocity).limit(this.maxForce);
 	}
 
-	flock (boids) {
+	avoid (predators) {
+		let steering = new Vector();
+		let total = 0;
+
+		predators.forEach(predator => {
+			const dis = this.position.dis(predator.position);
+
+			if (dis > this.perceptionRadius * 2) return;
+
+			const diff = this.position.clone().sub(predator.position).divScalar(dis);
+			total++;
+
+			steering.add(diff);
+		});
+
+		return total == 0 ? steering : steering.divScalar(total).setLength(this.maxSpeed).sub(this.velocity).limit(this.maxForce);
+	}
+
+	flock (boids, predators) {
 		this.acceleration.add(this.align(boids)).add(this.cohesion(boids)).add(this.separation(boids));
+
+		if (predators) this.acceleration.add(this.avoid(predators).multScalar(5));
 	}
 
 	update (w, h) {
@@ -212,26 +232,55 @@ class Boid {
 	}
 }
 
-class World {
-	constructor() {
-		this.flock = [];
-		this.width = 700;
-		this.height = 700;
+class Flock {
+	constructor (size, color, width, height) {
+		this.size = size;
+		this.color = color;
+		this.boids = [];
+		this.predatorFlock = null;
 
-		for (let a = 0; a < 200; a++) this.flock.push(new Boid(this.width, this.height));
+		for (let a = 0; a < size; a++) this.boids.push(new Boid(width, height));
 	}
 
 	draw (ctx) {
-		ctx.fillStyle = '#000000';
-		ctx.strokeStyle = '#88ff88';
+		ctx.fillStyle = this.color;
+		ctx.strokeStyle = '#ffffff';
 
-		this.flock.forEach(boid => boid.draw(ctx));
+		this.boids.forEach(boid => boid.draw(ctx));
+	}
+
+	update (width, height) {
+		this.boids.forEach(boid => {
+			boid.flock(this.boids, this.predatorFlock?.boids);
+			boid.update(width, height);
+		});
+	}
+}
+
+class World {
+	constructor() {
+		this.width = 800;
+		this.height = 800;
+		this.flocks = [
+			new Flock(100, '#070', this.width, this.height),
+			new Flock(100, '#077', this.width, this.height),
+			new Flock(10, '#700', this.width, this.height)
+		];
+
+		this.flocks[0].predatorFlock = this.flocks[2];
+		this.flocks[1].predatorFlock = this.flocks[2];
+	}
+
+	draw (ctx) {
+		this.flocks.forEach(flock => flock.draw(ctx));
 	}
 
 	update () {
-		this.flock.forEach(boid => {
-			boid.flock(this.flock);
-			boid.update(this.width, this.height);
-		});
+		this.flocks.forEach(flock => flock.update(this.width, this.height));
+	}
+
+	resize (w, h) {
+		this.width = w;
+		this.height = h;
 	}
 }

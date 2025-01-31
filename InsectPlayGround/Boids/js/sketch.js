@@ -42,6 +42,7 @@ function resize () {
 
 	ctx.imageSmoothingEnabled = true;
 
+	world.resize(width, height);
 	draw();
 }
 
