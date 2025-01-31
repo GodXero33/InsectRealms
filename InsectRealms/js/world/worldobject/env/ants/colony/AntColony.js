@@ -1,121 +1,9 @@
-class Vector {
-	constructor (x = 0, y = 0) {
-		this.x = x;
-		this.y = y;
-	}
-
-	set (x = 0, y = 0) {
-		this.x = x;
-		this.y = y;
-	}
-
-	add (vec) {
-		this.x += vec.x;
-		this.y += vec.y;
-		return this;
-	}
-
-	addScalar (scalar) {
-		this.x += scalar;
-		this.y += scalar;
-		return this;
-	}
-	
-	sub (vec) {
-		this.x -= vec.x;
-		this.y -= vec.y;
-		return this;
-	}
-
-	subScalar (scalar) {
-		this.x -= scalar;
-		this.y -= scalar;
-		return this;
-	}
-
-	mult (vec) {
-		this.x *= vec.x;
-		this.y *= vec.y;
-		return this;
-	}
-
-	multScalar (scalar) {
-		this.x *= scalar;
-		this.y *= scalar;
-		return this;
-	}
-
-	div (vec) {
-		if (vec.x != 0) this.x /= vec.x;
-		if (vec.y != 0) this.y /= vec.y;
-		return this;
-	}
-
-	divScalar (scalar) {
-		if (scalar == 0) return this;
-		
-		this.x /= scalar;
-		this.y /= scalar;
-		return this;
-	}
-
-	disSQRT (vec) {
-		return (this.x - vec.x) ** 2 + (this.y - vec.y) ** 2;
-	}
-
-	dis (vec) {
-		return Math.sqrt(this.disSQRT(vec));
-	}
-
-	lengthSQRT () {
-		return this.x * this.x + this.y * this.y;
-	}
-
-	length () {
-		return Math.sqrt(this.lengthSQRT());
-	}
-
-	normalize () {
-		const len = this.length();
-
-		if (len == 0) return this;
-
-		this.x /= len;
-		this.y /= len;
-		return this;
-	}
-
-	setLength (length) {
-		return this.normalize().multScalar(length);;
-	}
-
-	limit (max) {
-		const lenSQ = this.lengthSQRT();
-
-		if (lenSQ > max * max) this.normalize().multScalar(max);
-
-		return this;
-	}
-
-	randomize () {
-		this.x = Math.random() * 2 - 1;
-		this.y = Math.random() * 2 - 1;
-		
-		return this.normalize();
-	}
-
-	clone () {
-		return new Vector(this.x, this.y);
-	}
-
-	angle () {
-		return Math.atan2(this.y, this.x);
-	}
-}
+import Vector from "../../../../../extra/Vector.js";
+import WorldObject from "../../../../WorldObject.js";
 
 class Boid {
-	constructor (w, h) {
-		this.position = new Vector((Math.random() - 0.5) * w, (Math.random() - 0.5) * h);
+	constructor (x, y, w, h) {
+		this.position = new Vector(x + (Math.random() - 0.5) * w, y + (Math.random() - 0.5) * h);
 		this.velocity = new Vector().randomize().setLength(Math.random() * 1 + 0.5);
 		this.acceleration = new Vector();
 		this.maxForce = 0.01;
@@ -258,13 +146,13 @@ class Boid {
 }
 
 class Flock {
-	constructor (size, color, width, height) {
+	constructor (size, color, x, y, width, height) {
 		this.size = size;
 		this.color = color;
 		this.boids = [];
 		this.predatorFlock = null;
 
-		for (let a = 0; a < size; a++) this.boids.push(new Boid(width, height));
+		for (let a = 0; a < size; a++) this.boids.push(new Boid(x, y, width, height));
 	}
 
 	draw (ctx) {
@@ -289,20 +177,21 @@ class Flock {
 	}
 }
 
-class World {
-	constructor() {
-		this.width = 800;
-		this.height = 800;
-		this.radius1 = 200;
-		this.radius2 = 500;
-		this.flocks = [
-			new Flock(200, '#0a0', this.width, this.height),
-			new Flock(200, '#0aa', this.width, this.height),
-			new Flock(20, '#a00', this.width, this.height)
-		];
+class AntColony extends WorldObject {
+	constructor (data) {
+		super(data.x, data.y, 0, data.radius2 * 2, data.radius2 * 2);
 
-		this.flocks[0].predatorFlock = this.flocks[2];
-		this.flocks[1].predatorFlock = this.flocks[2];
+		this.miniMapColor = '#ff6655';
+		this.radius1 = data.radius1;
+		this.radius2 = data.radius2;
+		this.flocks = [];
+		this.updateOffViewport = false;
+
+		data.flocks.forEach(flock => {
+			this.flocks.push(new Flock(flock.count, flock.color, this.position.x, this.position.y, this.radius2, this.radius2));
+		});
+
+		data.predators.forEach(predatorData => this.flocks[predatorData[0]].predatorFlock = this.flocks[predatorData[1]]);
 	}
 
 	draw (ctx) {
@@ -310,12 +199,8 @@ class World {
 	}
 
 	update () {
-		// this.flocks.forEach(flock => flock.update(this.width, this.height));
-		this.flocks.forEach(flock => flock.updateR(-200, 200, this.radius1, this.radius2));
-	}
-
-	resize (w, h) {
-		this.width = w;
-		this.height = h;
+		this.flocks.forEach(flock => flock.updateR(this.position.x, this.position.y, this.radius1, this.radius2));
 	}
 }
+
+export default AntColony;

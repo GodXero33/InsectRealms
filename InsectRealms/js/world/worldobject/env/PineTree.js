@@ -17,6 +17,7 @@ class PineTree extends WorldObject {
 		this.miniMapColor = '#00ff00';
 		this.isLayered = true;
 		this.castShadow = true;
+		this.updateOffViewport = false;
 
 		const sameSizeTree = PineTree.instances.find(tree => tree.width == this.width);
 

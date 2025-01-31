@@ -63,7 +63,10 @@ class InsectWorld {
 	}
 
 	update (dt) {
-		this.objects.forEach(object => object.update(dt));
+		this.objects.filter(object => object.updateOffViewport || (
+			!object.updateOffViewport &&
+			WorldObject.isInViewport(object, this.camera.position.x, this.camera.position.y, this.camera.scale, this.width, this.height)
+		)).forEach(object => object.update(dt));
 	}
 
 	resize (w, h) {

@@ -1,6 +1,78 @@
 {
 	"objects": [
 		{
+			"type": "ant-colony",
+			"x": 1500,
+			"y": 2500,
+			"radius1": 100,
+			"radius2": 500,
+			"flocks": [
+				{
+					"color": "#ff0000",
+					"count": 10
+				},
+				{
+					"color": "#00ff00",
+					"count": 100
+				}
+			],
+			"predators": [[1, 0]]
+		},
+		{
+			"type": "ant-colony",
+			"x": -3000,
+			"y": 3000,
+			"radius1": 100,
+			"radius2": 1000,
+			"flocks": [
+				{
+					"color": "#ff0000",
+					"count": 10
+				},
+				{
+					"color": "#00ff00",
+					"count": 400
+				}
+			],
+			"predators": [[1, 0]]
+		},
+		{
+			"type": "ant-colony",
+			"x": -3000,
+			"y": -3000,
+			"radius1": 20,
+			"radius2": 200,
+			"flocks": [
+				{
+					"color": "#ff0000",
+					"count": 10
+				},
+				{
+					"color": "#999900",
+					"count": 200
+				}
+			],
+			"predators": [[1, 0]]
+		},
+		{
+			"type": "ant-colony",
+			"x": 2040,
+			"y": -3000,
+			"radius1": 100,
+			"radius2": 300,
+			"flocks": [
+				{
+					"color": "#ff0000",
+					"count": 10
+				},
+				{
+					"color": "#990088",
+					"count": 200
+				}
+			],
+			"predators": [[1, 0]]
+		},
+		{
 			"type": "pine-tree",
 			"x": -233,
 			"y": -1980,

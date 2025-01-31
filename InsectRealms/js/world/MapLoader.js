@@ -1,3 +1,4 @@
+import AntColony from "./worldobject/env/ants/colony/AntColony.js";
 import PineTree from "./worldobject/env/PineTree.js";
 
 class MapLoader {
@@ -7,6 +8,7 @@ class MapLoader {
 
 	static #generateObject (object, generateQuality) {
 		if (object.type == 'pine-tree') return new PineTree(object, generateQuality);
+		if (object.type == 'ant-colony') return new AntColony(object);
 	}
 
 	static async load (world, data, generateQuality = MapLoader.GENERATE_QUALITY_LOW) {
@@ -16,7 +18,7 @@ class MapLoader {
 			for (let a = 0; a < length; a++) {
 				world.objects.push(MapLoader.#generateObject(data[a], generateQuality));
 				window['load-progress-controller'].generateMapProgress(a + 1, length);
-				await new Promise(resolve => setTimeout(resolve, 0));
+				// await new Promise(resolve => setTimeout(resolve, 0));
 			}
 
 			res();

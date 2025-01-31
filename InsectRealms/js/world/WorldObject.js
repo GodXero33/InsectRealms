@@ -6,6 +6,7 @@ class WorldObject {
 		this.rotation = rotation;
 		this.width = width;
 		this.height = height;
+		this.updateOffViewport = true;
 	}
 
 	static isInViewport (worldObject, cameraX, cameraY, cameraScale, viewPortWidth, viewPortHeight) {

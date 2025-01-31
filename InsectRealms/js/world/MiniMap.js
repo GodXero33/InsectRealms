@@ -42,7 +42,7 @@ class MiniMap {
 		this.world.objects.forEach(object => {
 			ctx.fillStyle = object.miniMapColor;
 
-			ctx.fillRect(objOffsetX + object.position.x * objPosScale, objOffsetY + object.position.y * objPosScale, object.width * objPosScale, object.height * objPosScale)
+			ctx.fillRect(objOffsetX + (object.position.x - object.width * 0.5) * objPosScale, objOffsetY + (object.position.y - object.height * 0.5) * objPosScale, object.width * objPosScale, object.height * objPosScale)
 		});
 
 		const img = new Image();
@@ -63,7 +63,7 @@ class MiniMap {
 		const height = this.height;
 		const ctx = this.ctx;
 		const maxDimension = Math.max(screenWidth, screenHeight);
-		const mapWidth = Math.min(0.2 * maxDimension, 250);
+		const mapWidth = this.width;
 		const mapHeight = mapWidth / this.asp;
 		const borderSize = maxDimension * 0.002;
 		const x = width - mapWidth - borderSize - 10;
