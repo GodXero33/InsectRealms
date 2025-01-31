@@ -1,4 +1,4 @@
-import Point from "../../extra/Point.js";
+import Vector from "../../extra/Vector.js";
 
 class CameraMouseControl {
 	constructor (camera, canvas) {
@@ -22,7 +22,7 @@ class CameraMouseControl {
 		if (event.target != this.canvas || !this.isEnabled) return;
 		
 		if (event.button == 0) {
-			this.mousedownPoint = new Point(event.x + this.camera.position.x * this.camera.scale, event.y + this.camera.position.y * this.camera.scale);
+			this.mousedownPoint = new Vector(event.x + this.camera.position.x * this.camera.scale, event.y + this.camera.position.y * this.camera.scale);
 		}
 	}
 

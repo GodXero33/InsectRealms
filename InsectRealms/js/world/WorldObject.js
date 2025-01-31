@@ -1,8 +1,8 @@
-import Point from "../extra/Point.js";
+import Vector from "../extra/Vector.js";
 
 class WorldObject {
 	constructor (x, y, rotation, width, height) {
-		this.position = new Point(x, y);
+		this.position = new Vector(x, y);
 		this.rotation = rotation;
 		this.width = width;
 		this.height = height;

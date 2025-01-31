@@ -1,4 +1,4 @@
-import Point from "../../extra/Point.js";
+import Vector from "../../extra/Vector.js";
 
 class CameraTouchControl {
 	constructor (camera, pinchZoomFact, canvas) {
@@ -27,7 +27,7 @@ class CameraTouchControl {
 		
 		if (event.touches.length == 1) {
 			const touch = event.touches[0];
-			this.touchdownPoint = new Point(touch.clientX + this.camera.position.x * this.camera.scale, touch.clientY + this.camera.position.y * this.camera.scale);
+			this.touchdownPoint = new Vector(touch.clientX + this.camera.position.x * this.camera.scale, touch.clientY + this.camera.position.y * this.camera.scale);
 		}
 
 		if (event.touches.length == 2) {

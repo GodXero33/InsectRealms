@@ -1,9 +1,9 @@
-import Point from "../../extra/Point.js";
+import Vector from "../../extra/Vector.js";
 
 class Camera {
 	constructor (world, x, y) {
 		this.world = world;
-		this.position = new Point(x, y);
+		this.position = new Vector(x, y);
 		this.scale = 1;
 		// this.rotation = 0;
 		this.maxZoom = 5;
