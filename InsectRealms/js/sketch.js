@@ -16,7 +16,7 @@ import MapLoader from './world/MapLoader.js';
 	const simulationData = { visibleObjects: 0 };
 
 	function draw () {
-		ctx.fillStyle = '#787812';
+		ctx.fillStyle = '#677812';
 
 		ctx.fillRect(0, 0, width, height);
 		insectWorld.render(ctx, width, height);

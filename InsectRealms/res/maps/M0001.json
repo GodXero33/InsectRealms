@@ -8,12 +8,18 @@
 			"radius2": 500,
 			"flocks": [
 				{
-					"color": "#ff0000",
-					"count": 10
+					"count": 10,
+					"ant": {
+						"color": "#654512",
+						"size": 6
+					}
 				},
 				{
-					"color": "#00ff00",
-					"count": 100
+					"count": 100,
+					"ant": {
+						"color": "#003400",
+						"size": 5
+					}
 				}
 			],
 			"predators": [[1, 0]]
@@ -26,12 +32,18 @@
 			"radius2": 1000,
 			"flocks": [
 				{
-					"color": "#ff0000",
-					"count": 10
+					"count": 10,
+					"ant": {
+						"color": "#672323",
+						"size": 6
+					}
 				},
 				{
-					"color": "#00ff00",
-					"count": 400
+					"count": 400,
+					"ant": {
+						"color": "#561212",
+						"size": 5
+					}
 				}
 			],
 			"predators": [[1, 0]]
@@ -44,12 +56,18 @@
 			"radius2": 200,
 			"flocks": [
 				{
-					"color": "#ff0000",
-					"count": 10
+					"count": 10,
+					"ant": {
+						"color": "#122312",
+						"size": 6
+					}
 				},
 				{
-					"color": "#999900",
-					"count": 200
+					"count": 200,
+					"ant": {
+						"color": "#121212",
+						"size": 5
+					}
 				}
 			],
 			"predators": [[1, 0]]
@@ -62,12 +80,18 @@
 			"radius2": 300,
 			"flocks": [
 				{
-					"color": "#ff0000",
-					"count": 10
+					"count": 10,
+					"ant": {
+						"color": "#123454",
+						"size": 6
+					}
 				},
 				{
-					"color": "#990088",
-					"count": 200
+					"count": 200,
+					"ant": {
+						"color": "#124334",
+						"size": 5
+					}
 				}
 			],
 			"predators": [[1, 0]]

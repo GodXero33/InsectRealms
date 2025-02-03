@@ -124,7 +124,7 @@ class Boid {
 		this.edgeSteering = 0.1;
 	}
 
-	draw (ctx) {
+	/* draw (ctx) {
 		const angle = this.velocity.angle();
 		const size = 10;
 
@@ -145,6 +145,22 @@ class Boid {
 		ctx.closePath();
 		ctx.fill();
 		ctx.stroke();
+	} */
+
+	draw (ctx) {
+		const size = 4;
+		
+		ctx.save();
+		ctx.translate(this.position.x, this.position.y);
+		ctx.rotate(this.velocity.angle());
+		ctx.fillStyle = '#f0f';
+		ctx.fillRect(-size * 1.8, -size, size * 3.6, size * 2);
+		ctx.beginPath();
+		ctx.arc(-size * 0.8, 0, size, 0, Math.PI * 2);
+		ctx.arc(size, 0, size * 0.8, 0, Math.PI * 2);
+		ctx.fillStyle = '#ff0';
+		ctx.fill();
+		ctx.restore();
 	}
 
 	edges (w, h) {

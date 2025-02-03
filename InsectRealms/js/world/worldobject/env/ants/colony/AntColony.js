@@ -12,27 +12,14 @@ class Boid {
 		this.edgeSteering = 0.1;
 	}
 
-	draw (ctx) {
+	draw (ctx, texture) {
 		const angle = this.velocity.angle();
-		const size = 10;
-
-		const x1 = this.position.x + Math.cos(angle) * size;
-		const y1 = this.position.y + Math.sin(angle) * size;
-		const x2 = this.position.x + Math.cos(angle + Math.PI * 2 / 3) * size * 0.8;
-		const y2 = this.position.y + Math.sin(angle + Math.PI * 2 / 3) * size * 0.8;
-		const x3 = this.position.x + Math.cos(angle - Math.PI * 2 / 3) * size * 0.8;
-		const y3 = this.position.y + Math.sin(angle - Math.PI * 2 / 3) * size * 0.8;
-		const x4 = this.position.x;
-		const y4 = this.position.y;
-
-		ctx.beginPath();
-		ctx.moveTo(x1, y1);
-		ctx.lineTo(x2, y2);
-		ctx.lineTo(x4, y4);
-		ctx.lineTo(x3, y3);
-		ctx.closePath();
-		ctx.fill();
-		ctx.stroke();
+		
+		ctx.save();
+		ctx.translate(this.position.x, this.position.y);
+		ctx.rotate(this.velocity.angle());
+		ctx.drawImage(texture.texture, -texture.width * 0.5, -texture.height * 0.5, texture.width, texture.height);
+		ctx.restore();
 	}
 
 	edges (w, h) {
@@ -146,20 +133,45 @@ class Boid {
 }
 
 class Flock {
-	constructor (size, color, x, y, width, height) {
+	constructor (size, x, y, width, height, antData) {
 		this.size = size;
-		this.color = color;
 		this.boids = [];
 		this.predatorFlock = null;
+		this.antTexture = { texture: null, width: 0, height: 0 };
 
 		for (let a = 0; a < size; a++) this.boids.push(new Boid(x, y, width, height));
+		
+		this.#generateAntTexture(antData);
+	}
+
+	#generateAntTexture (antData) {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
+		const img = new Image();
+		const radius = antData.size * 0.5;
+		const width = radius * 3.6;
+		const height = radius * 2;
+
+		canvas.width = width;
+		canvas.height = height;
+
+		ctx.fillStyle = antData.color;
+
+		ctx.beginPath();
+		ctx.arc(-radius * 0.8 + width * 0.5, height * 0.5, radius, 0, Math.PI * 2);
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(radius +  width * 0.5, height * 0.5, radius * 0.8, 0, Math.PI * 2);
+		ctx.fill();
+
+		img.src = canvas.toDataURL();
+		this.antTexture.texture = img;
+		this.antTexture.width = width;
+		this.antTexture.height = height;
 	}
 
 	draw (ctx) {
-		ctx.fillStyle = this.color;
-		ctx.strokeStyle = '#565656';
-
-		this.boids.forEach(boid => boid.draw(ctx));
+		this.boids.forEach(boid => boid.draw(ctx, this.antTexture));
 	}
 
 	update (width, height) {
@@ -188,7 +200,7 @@ class AntColony extends WorldObject {
 		this.updateOffViewport = false;
 
 		data.flocks.forEach(flock => {
-			this.flocks.push(new Flock(flock.count, flock.color, this.position.x, this.position.y, this.radius2, this.radius2));
+			this.flocks.push(new Flock(flock.count, this.position.x, this.position.y, this.radius2, this.radius2, flock.ant));
 		});
 
 		data.predators.forEach(predatorData => this.flocks[predatorData[0]].predatorFlock = this.flocks[predatorData[1]]);
