@@ -121,24 +121,87 @@ class NeuralNetwork {
 		this.inputLength = inputLength;
 		this.hiddenLayers = hiddenLayers.map((length, index) => new NeuralLayer(length, index == 0 ? this.inputLength : hiddenLayers[index - 1]));
 		this.outputLayer = new NeuralLayer(outputLength, hiddenLayers[hiddenLayers.length - 1]);
-		this.learningRate = 0.05;
+		this.learningRate = 0.1;
 	}
 
 	activation (x) {
-		return Math.tanh(x);
+		return 1 / (1 + Math.exp(-x));
+	}
+
+	activationDerivative (x) {
+		return Math.exp(x) / Math.pow(1 + Math.exp(x), 2);
+	}
+
+	guess (input) {
+		let output = input;
+
+		for (const layer of [...this.hiddenLayers, this.outputLayer]) {
+			const nextInput = new Array(layer.length).fill(0);
+
+			for (let i = 0; i < layer.length; i++) {
+				nextInput[i] = layer.biases[i];
+
+				for (let j = 0; j < layer.prevLength; j++) {
+					nextInput[i] += layer.weights[j][i] * output[j];
+				}
+
+				nextInput[i] = this.activation(nextInput[i]);
+			}
+
+			output = nextInput;
+		}
+
+		return output;
 	}
 
 	feedForward (input) {
-		let output = new Array(output.length).fill(0);
+		let activations = [input];
+		let currentInput = input;
 
-		for (let a = 0; a < firstHiddenLayer.length; a++) {
-			output[a] = 0;
+		for (const layer of [...this.hiddenLayers, this.outputLayer]) {
+			const nextInput = new Array(layer.length).fill(0);
 
-			for (let b = 0; b < this.inputLength; b++) output[a] += this.hiddenLayers[0].weights[b][a] * input[b];
+			for (let i = 0; i < layer.length; i++) {
+				nextInput[i] = layer.biases[i];
 
-			output[a] = this.activation(output[a] + this.hiddenLayers[0].bias[a]);
+				for (let j = 0; j < layer.prevLength; j++) {
+					nextInput[i] += layer.weights[j][i] * currentInput[j];
+				}
+
+				nextInput[i] = this.activation(nextInput[i]);
+			}
+
+			activations.push(nextInput);
+			currentInput = nextInput;
+		}
+
+		return activations;
+	}
+
+	backpropagation (activations, target) {
+		let errors = activations[activations.length - 1].map((output, i) => output - target[i]);
+		let deltas = errors.map((error, i) => error * this.activationDerivative(activations[activations.length - 1][i]));
+
+		for (let layerIndex = this.hiddenLayers.length; layerIndex >= 0; layerIndex--) {
+			const layer = layerIndex == this.hiddenLayers.length ? this.outputLayer : this.hiddenLayers[layerIndex];
+			const prevActivations = activations[layerIndex];
+			const newDeltas = new Array(layer.prevLength).fill(0);
+
+			for (let i = 0; i < layer.length; i++) {
+				for (let j = 0; j < layer.prevLength; j++) {
+					newDeltas[j] += deltas[i] * layer.weights[j][i];
+					layer.weights[j][i] -= this.learningRate * deltas[i] * prevActivations[j];
+				}
+
+				layer.biases[i] -= this.learningRate * deltas[i];
+			}
+
+			deltas = newDeltas.map((delta, i) => delta * this.activationDerivative(prevActivations[i]));
 		}
 	}
 
-	train (input, target) {}
+	train (input, target) {
+		const activations = this.feedForward(input);
+		this.backpropagation(activations, target);
+	}
 }

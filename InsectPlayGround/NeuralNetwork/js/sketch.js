@@ -1,4 +1,35 @@
-const network = new NeuralNetwork(10, [20, 20, 20], 6);
+const network = new NeuralNetwork(2, [10, 10], 2);
+
+const dataset = [
+	[
+		[0, 0],
+		[1, 1]
+	],
+	[
+		[1, 0],
+		[0, 1]
+	],
+	[
+		[0, 1],
+		[1, 0]
+	],
+	[
+		[1, 1],
+		[0, 0]
+	]
+];
+
+for (let a = 0; a < 100000; a++) {
+	dataset.forEach(data => {
+		network.train(data[0], data[1]);
+	});
+}
+
+for (let a = 0; a < 4; a++) {
+	console.log(network.guess(dataset[a][0]).map(v => Math.round(v)));
+	console.log(dataset[a][1]);
+}
+
 console.log(network);
 
 const networkDrawer = new NeuralNetworkDrawer(network);
