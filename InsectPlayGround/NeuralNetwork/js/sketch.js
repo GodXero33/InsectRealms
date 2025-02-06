@@ -1,36 +1,48 @@
-const network = new NeuralNetwork(2, [10, 10], 2);
+const network = new NeuralNetwork(9, [20, 20, 20], 1);
+let trainingState = 100;
 
-const dataset = [
-	[
-		[0, 0],
-		[1, 1]
-	],
-	[
-		[1, 0],
-		[0, 1]
-	],
-	[
-		[0, 1],
-		[1, 0]
-	],
-	[
-		[1, 1],
-		[0, 0]
-	]
-];
+async function networkSetup (dataset) {
+	console.log(dataset);
+	let time = performance.now();
+	console.log("Training started:");
+	const iters = 100000;
 
-for (let a = 0; a < 100000; a++) {
-	dataset.forEach(data => {
-		network.train(data[0], data[1]);
-	});
+	for (let a = 0; a < iters; a++) {
+		dataset.forEach(data => {
+			network.train(data[0].map(v => v / 9), [data[1] / 9]);
+		});
+
+		trainingState = a * 100 / iters;
+		draw();
+		await new Promise(res => setTimeout(res, 0));
+	}
+	
+	for (let a = 0; a < dataset.length; a++) {
+		console.log("guess: " + network.guess(dataset[a][0]).map(v => Math.round(v * 9)));
+		console.log("actual: " + dataset[a][1]);
+	}
+	
+	console.log("Training ended in " + (performance.now() - time) + " ms.");
+	console.log(network);
 }
 
-for (let a = 0; a < 4; a++) {
-	console.log(network.guess(dataset[a][0]).map(v => Math.round(v)));
-	console.log(dataset[a][1]);
+async function loadData () {
+	try {
+		const response = await fetch('../TicTacToe-ForMakeDatasetToNeuralNetwork/js/data.json');
+
+		if (!response.ok) throw new Error('Failed to fetch!');
+
+		const data = await response.json();
+
+		networkSetup(data);
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-console.log(network);
+loadData();
+
+
 
 const networkDrawer = new NeuralNetworkDrawer(network);
 const ctx = canvas.getContext('2d');
@@ -46,6 +58,12 @@ function draw () {
 	ctx.translate(width * 0.5, height * 0.5);
 	networkDrawer.draw(ctx, -width * 0.5, -height * 0.5, width, height);
 	ctx.setTransform(transform);
+
+	ctx.fillStyle = '#ffffff';
+	ctx.font = '30px Arial';
+	ctx.textBaseline = 'middle';
+
+	ctx.fillText(trainingState + '%', 210, 30);
 }
 
 function update () {}

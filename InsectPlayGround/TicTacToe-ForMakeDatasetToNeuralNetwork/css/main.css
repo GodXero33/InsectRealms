@@ -1,0 +1,98 @@
+:root {
+	--background-color: #000000;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	user-select: none;
+}
+
+html {
+	font-size: 18px;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	height: 100svh;
+}
+
+body {
+	background-color: var(--background-color);
+}
+
+#main-container {
+	position: absolute;
+	margin-inline: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	max-width: 900px;
+	background-color: var(--background-color);
+}
+
+#grid {
+	--gap: 0.2rem;
+	isolation: isolate;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: clamp(200px, 100%, 350px);
+	aspect-ratio: 1 / 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+}
+
+#grid .row {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	flex-basis: 33.333%;
+	display: flex;
+	flex-direction: row;
+	gap: var(--gap);
+}
+
+#grid .cell {
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 100%;
+	flex-basis: 33.333%;
+	background-color: #476847;
+	box-shadow: 0 0 5px #00000077;
+	transition: transform 0.2s linear;
+	z-index: 1;
+	background-position: center center;
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+}
+
+#grid .cell.x {
+	background-image: url(../res/x.png);
+	background-color: #501a1a;
+}
+
+#grid .cell.o {
+	background-image: url(../res/o.png);
+	background-color: #182a51;
+}
+
+#grid .cell:not(.x):not(.o) {
+	cursor: pointer;
+}
+
+#grid .cell:not(.x):not(.o):hover {
+	transform: scale(1.1);
+	z-index: 2;
+}
+
