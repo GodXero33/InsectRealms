@@ -1,15 +1,18 @@
-const network = new NeuralNetwork(9, [20, 20, 20], 1);
+const network = new NeuralNetwork(9, [18, 18, 18, 18], 9);
 let trainingState = 100;
 
 async function networkSetup (dataset) {
 	console.log(dataset);
 	let time = performance.now();
 	console.log("Training started:");
-	const iters = 100000;
+	const iters = 10000;
 
 	for (let a = 0; a < iters; a++) {
 		dataset.forEach(data => {
-			network.train(data[0].map(v => v / 9), [data[1] / 9]);
+			const target = new Array(9).fill(0);
+			target[data[1]] = 1;
+
+			network.train(data[0].map(v => v / 2), target);
 		});
 
 		trainingState = a * 100 / iters;
@@ -18,7 +21,8 @@ async function networkSetup (dataset) {
 	}
 	
 	for (let a = 0; a < dataset.length; a++) {
-		console.log("guess: " + network.guess(dataset[a][0]).map(v => Math.round(v * 9)));
+		const guess =  network.guess(dataset[a][0]);
+		console.log("guess: " + guess.indexOf(Math.max(...guess)));
 		console.log("actual: " + dataset[a][1]);
 	}
 	
