@@ -121,7 +121,7 @@ class NeuralNetwork {
 		this.inputLength = inputLength;
 		this.hiddenLayers = hiddenLayers.map((length, index) => new NeuralLayer(length, index == 0 ? this.inputLength : hiddenLayers[index - 1]));
 		this.outputLayer = new NeuralLayer(outputLength, hiddenLayers[hiddenLayers.length - 1]);
-		this.learningRate = 0.1;
+		this.learningRate = 0.01;
 	}
 
 	activation (x) {

@@ -1,11 +1,20 @@
 const network = new NeuralNetwork(9, [18, 18, 18, 18], 9);
 let trainingState = 100;
 
+function formatTime (ms) {
+	let seconds = Math.floor(ms / 1000);
+	let hours = Math.floor(seconds / 3600);
+	let minutes = Math.floor((seconds % 3600) / 60);
+	seconds = seconds % 60;
+
+	return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
 async function networkSetup (dataset) {
 	console.log(dataset);
 	let time = performance.now();
-	console.log("Training started:");
-	const iters = 10000;
+	console.log('Training started:');
+	const iters = 50000;
 
 	for (let a = 0; a < iters; a++) {
 		dataset.forEach(data => {
@@ -22,11 +31,13 @@ async function networkSetup (dataset) {
 	
 	for (let a = 0; a < dataset.length; a++) {
 		const guess =  network.guess(dataset[a][0]);
-		console.log("guess: " + guess.indexOf(Math.max(...guess)));
-		console.log("actual: " + dataset[a][1]);
+		console.log('guess: ' + guess.indexOf(Math.max(...guess)));
+		console.log('actual guess: ', guess);
+		console.log('target: ' + dataset[a][1]);
+		console.log('\n');
 	}
 	
-	console.log("Training ended in " + (performance.now() - time) + " ms.");
+	console.log('Training ended in ' + formatTime(performance.now() - time));
 	console.log(network);
 }
 
