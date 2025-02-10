@@ -111,8 +111,8 @@ class NeuralLayer {
 	constructor (length, prevLength) {
 		this.length = length;
 		this.prevLength = prevLength;
-		this.weights = Array.from({ length: prevLength }, () => Array.from({ length }, () => Math.random()));
-		this.biases = Array.from({ length }, () => Math.random());
+		this.weights = Array.from({ length: prevLength }, () => Array.from({ length }, () => Math.random() * 2 - 1));
+		this.biases = Array.from({ length }, () => Math.random() * 2 - 1);
 	}
 }
 
@@ -121,11 +121,12 @@ class NeuralNetwork {
 		this.inputLength = inputLength;
 		this.hiddenLayers = hiddenLayers.map((length, index) => new NeuralLayer(length, index == 0 ? this.inputLength : hiddenLayers[index - 1]));
 		this.outputLayer = new NeuralLayer(outputLength, hiddenLayers[hiddenLayers.length - 1]);
-		this.learningRate = 0.01;
+		this.learningRate = 0.005;
 	}
 
 	activation (x) {
 		return 1 / (1 + Math.exp(-x));
+		// return Math.max(0, x);
 	}
 
 	activationDerivative (x) {
@@ -180,7 +181,8 @@ class NeuralNetwork {
 
 	backpropagation (activations, target) {
 		let errors = activations[activations.length - 1].map((output, i) => output - target[i]);
-		let deltas = errors.map((error, i) => error * this.activationDerivative(activations[activations.length - 1][i]));
+		let deltas = errors.map((error, i) => error * this.activation(activations[activations.length - 1][i]));
+		// let deltas = errors.map((error, i) => error * this.activationDerivative(activations[activations.length - 1][i]));
 
 		for (let layerIndex = this.hiddenLayers.length; layerIndex >= 0; layerIndex--) {
 			const layer = layerIndex == this.hiddenLayers.length ? this.outputLayer : this.hiddenLayers[layerIndex];
@@ -196,7 +198,8 @@ class NeuralNetwork {
 				layer.biases[i] -= this.learningRate * deltas[i];
 			}
 
-			deltas = newDeltas.map((delta, i) => delta * this.activationDerivative(prevActivations[i]));
+			deltas = newDeltas.map((delta, i) => delta * this.activation(prevActivations[i]));
+			// deltas = newDeltas.map((delta, i) => delta * this.activationDerivative(prevActivations[i]));
 		}
 	}
 

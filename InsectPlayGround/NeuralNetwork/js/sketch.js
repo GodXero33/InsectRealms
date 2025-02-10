@@ -24,9 +24,9 @@ async function networkSetup (dataset) {
 			network.train(data[0].map(v => v / 2), target);
 		});
 
-		trainingState = a * 100 / iters;
-		draw();
-		await new Promise(res => setTimeout(res, 0));
+		// trainingState = a * 100 / iters;
+		// draw();
+		// await new Promise(res => setTimeout(res, 0));
 	}
 	
 	for (let a = 0; a < dataset.length; a++) {

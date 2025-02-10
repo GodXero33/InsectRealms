@@ -1,3 +1,10 @@
+const graph = new Graph(
+	new Spiral({ start: 0, end: Math.PI * 10, step: 0.05, type: 'xyt', color: '#f00' }),
+	new Spiral({ start: 0, end: Math.PI * 10, step: 0.05, type: 'xyt', color: '#0ff' }, 0, 0.1, 0.25),
+	new Spiral({ start: 0, end: Math.PI * 10, step: 0.05, type: 'xyt', color: '#0f0' }, 0, 0.1, 0.1)
+);
+console.log(graph);
+
 const ctx = canvas.getContext('2d');
 let isPlaying = false;
 let animationFrame = null;
@@ -9,7 +16,7 @@ function draw () {
 
 	ctx.clearRect(0, 0, width, height);
 	ctx.translate(width * 0.5, height * 0.5);
-	// 
+	graph.draw(ctx, 0, 0, width, height);
 	ctx.setTransform(transform);
 }
 
