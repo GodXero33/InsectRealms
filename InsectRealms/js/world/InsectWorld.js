@@ -1,5 +1,6 @@
 import Camera from "./camera/Camera.js";
 import WorldObject from "./WorldObject.js";
+import GrassGenerator from "./worldobject/env/GrassGenerator.js";
 
 class InsectWorld {
 	static MAX_LAYERS_COUNT = 10;
@@ -15,6 +16,7 @@ class InsectWorld {
 		this.worldHeight = 0;
 		this.objects = [];
 		this.drawableObjects = [];
+		this.grasses = [];
 	}
 
 	#drawGrid (ctx, cellSize = 50) {
@@ -36,13 +38,15 @@ class InsectWorld {
 	}
 
 	#drawGroundTexture (ctx) {
-		const size = 400;
+		const size = 100;
 		const xs = this.worldWidth * 0.5 / size;
 		const ys = this.worldHeight * 0.5 / size;
 
 		for (let a = -xs - 1; a < xs + 2; a++)
 			for (let b = -ys - 1; b < ys + 2; b++)
 				ctx.drawImage(this.resources['ground-001'], a * size - size * 0.5, b * size - size * 0.5, size, size);
+
+		this.grasses.forEach(grass => ctx.drawImage(grass.img, grass.x - grass.w * 0.5, grass.y - grass.h * 0.5, grass.w, grass.h));
 	}
 
 	render (ctx, width, height) {

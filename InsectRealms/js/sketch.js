@@ -105,7 +105,7 @@ import MapLoader from './world/MapLoader.js';
 	}
 
 	async function initGeneratingSimulation () {
-		await MapLoader.load(insectWorld, worldResources.maps['M0002'], 2);
+		await MapLoader.load(insectWorld, worldResources.maps['M0001'], 2);
 		
 		miniMap.recalculate();
 		miniMap.generateStaticImage();
