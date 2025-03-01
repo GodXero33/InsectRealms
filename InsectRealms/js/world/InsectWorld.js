@@ -11,8 +11,8 @@ class InsectWorld {
 		this.scale = 1;
 		this.debugMode = false;
 		this.camera = new Camera(this, 0, 0);
-		this.worldWidth = 10000;
-		this.worldHeight = 10000;
+		this.worldWidth = 0;
+		this.worldHeight = 0;
 		this.objects = [];
 		this.drawableObjects = [];
 	}
@@ -35,11 +35,22 @@ class InsectWorld {
 		ctx.stroke();
 	}
 
+	#drawGroundTexture (ctx) {
+		const size = 400;
+		const xs = this.worldWidth * 0.5 / size;
+		const ys = this.worldHeight * 0.5 / size;
+
+		for (let a = -xs - 1; a < xs + 2; a++)
+			for (let b = -ys - 1; b < ys + 2; b++)
+				ctx.drawImage(this.resources['ground-001'], a * size - size * 0.5, b * size - size * 0.5, size, size);
+	}
+
 	render (ctx, width, height) {
 		const transform = ctx.getTransform();
 
 		ctx.translate(width / 2, height / 2);
 		this.camera.update(ctx);
+		this.#drawGroundTexture(ctx);
 
 		this.drawableObjects = this.objects.filter(object => WorldObject.isInViewport(object, this.camera.position.x, this.camera.position.y, this.camera.scale, this.width, this.height));
 		const layeredObjects = this.drawableObjects.filter(object => object.isLayered);

@@ -11,12 +11,17 @@ class MapLoader {
 		if (object.type == 'ant-colony') return new AntColony(object);
 	}
 
-	static async load (world, data, generateQuality = MapLoader.GENERATE_QUALITY_LOW) {
+	static async load (world, map, generateQuality = MapLoader.GENERATE_QUALITY_LOW) {
+		console.log(map);
+		world.worldWidth = map.width;
+		world.worldHeight = map.height;
+		const objects = map.objects;
+
 		return new Promise(async (res) => {
-			const length = data.length;
+			const length = objects.length;
 
 			for (let a = 0; a < length; a++) {
-				world.objects.push(MapLoader.#generateObject(data[a], generateQuality));
+				world.objects.push(MapLoader.#generateObject(objects[a], generateQuality));
 				window['load-progress-controller'].generateMapProgress(a + 1, length);
 				// await new Promise(resolve => setTimeout(resolve, 0));
 			}

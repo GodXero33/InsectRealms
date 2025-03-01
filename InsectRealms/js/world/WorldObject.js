@@ -7,6 +7,8 @@ class WorldObject {
 		this.width = width;
 		this.height = height;
 		this.updateOffViewport = true;
+		this.isLayered = false;
+		this.castShadow = true;
 	}
 
 	static isInViewport (worldObject, cameraX, cameraY, cameraScale, viewPortWidth, viewPortHeight) {

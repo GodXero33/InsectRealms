@@ -2,21 +2,21 @@
 	"resources": [
 		{
 			"type": "sprite",
-			"name": "spider12",
-			"extension": "png",
-			"path": "creatures/spider/"
-		},
-		{
-			"type": "json",
-			"name": "spider_map",
-			"extension": "json",
-			"path": "creatures/spider/"
+			"name": "ground-001",
+			"extension": "jpg",
+			"path": "img/"
 		}
 	],
 	"maps": [
 		{
 			"type": "json",
 			"name": "M0001",
+			"extension": "json",
+			"path": "maps/"
+		},
+		{
+			"type": "json",
+			"name": "M0002",
 			"extension": "json",
 			"path": "maps/"
 		}

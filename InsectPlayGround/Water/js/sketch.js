@@ -46,8 +46,6 @@ function resize () {
 play();
 resize();
 
-let pulsAddCount = 0;
-
 window.addEventListener('resize', resize);
 window.addEventListener('keydown', event => {
 	if (event.code == 'Space') {
@@ -57,15 +55,4 @@ window.addEventListener('keydown', event => {
 window.addEventListener('mousemove', (event) => {
 	world.mouse.x = event.x - width * 0.5;
 	world.mouse.y = event.y - height * 0.5;
-
-	pulsAddCount++;
-
-	if (pulsAddCount == 5) {
-		pulsAddCount = 0;
-		world.addPuls(event.x - width * 0.5, event.y - height * 0.5, 0);
-	}
-});
-
-window.addEventListener('click', (event) => {
-	world.addPuls(event.x - width * 0.5, event.y - height * 0.5, 0);
 });

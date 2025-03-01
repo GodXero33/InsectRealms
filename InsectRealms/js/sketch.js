@@ -105,9 +105,11 @@ import MapLoader from './world/MapLoader.js';
 	}
 
 	async function initGeneratingSimulation () {
-		await MapLoader.load(insectWorld, worldResources.maps['M0001'].objects, 2);
-		window['load-progress-controller'].generateMapEnd();
+		await MapLoader.load(insectWorld, worldResources.maps['M0002'], 2);
+		
+		miniMap.recalculate();
 		miniMap.generateStaticImage();
+		window['load-progress-controller'].generateMapEnd();
 		createGUI();
 		createStatsDisplay();
 

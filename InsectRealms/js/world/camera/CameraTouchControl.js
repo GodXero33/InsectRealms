@@ -35,8 +35,8 @@ class CameraTouchControl {
 			const touch2 = event.touches[1];
 
 			this.pinchZoomStart = {
-				p1: new Point(touch1.clientX + this.camera.position.x * this.camera.scale, touch1.clientY + this.camera.position.y * this.camera.scale),
-				p2: new Point(touch2.clientX + this.camera.position.x * this.camera.scale, touch2.clientY + this.camera.position.y * this.camera.scale)
+				p1: new Vector(touch1.clientX + this.camera.position.x * this.camera.scale, touch1.clientY + this.camera.position.y * this.camera.scale),
+				p2: new Vector(touch2.clientX + this.camera.position.x * this.camera.scale, touch2.clientY + this.camera.position.y * this.camera.scale)
 			};
 		}
 	}

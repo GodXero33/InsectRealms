@@ -11,14 +11,24 @@ class MiniMap {
 		this.#createDOM();
 	}
 
+	#appendCSS () {
+		this.canvas.style = 'position: absolute; width: clamp(200px, 20%, 350px); aspect-ratio: ' + this.world.worldWidth + ' / ' + this.world.worldHeight + '; bottom: 10px; right: 10px; z-index: 200; filter: drop-shadow(0 0 5px #000000); border: 2px solid #aaaaaa;';
+	}
+
 	#createDOM () {
 		this.canvas = document.createElement('canvas');
 		this.ctx = this.canvas.getContext('2d');
 
-		this.canvas.style = 'position: absolute; width: clamp(200px, 20%, 350px); aspect-ratio: ' + this.world.worldWidth + ' / ' + this.world.worldHeight + '; bottom: 10px; right: 10px; z-index: 200; filter: drop-shadow(0 0 5px #000000); border: 2px solid #aaaaaa;';
-
+		this.#appendCSS();
 		this.resize();
 		window['insect_realms_doms'].mainContainer.appendChild(this.canvas);
+	}
+
+	recalculate () {
+		this.asp = this.world.worldWidth / this.world.worldHeight;
+		
+		this.#appendCSS();
+		this.resize();
 	}
 
 	generateStaticImage () {
@@ -54,7 +64,7 @@ class MiniMap {
 	resize () {
 		this.width = this.canvas.clientWidth;
 		this.height = this.canvas.clientHeight;
-		this.canvas.width  =this.width;
+		this.canvas.width = this.width;
 		this.canvas.height = this.height;
 	}
 

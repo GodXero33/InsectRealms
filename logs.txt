@@ -1,0 +1,46 @@
+Starting up http-server, serving ./
+
+http-server version: 14.1.1
+
+http-server settings: 
+CORS: true
+Cache: -1 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://192.168.8.159:8080
+  http://127.0.0.1:8080
+Hit CTRL-C to stop the server
+
+[Wed Feb 26 2025 20:30:30 GMT+0530 (India Standard Time)]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:30:30 GMT+0530 (India Standard Time)]  "GET /favicon.ico" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:30:30 GMT+0530 (India Standard Time)]  "GET /favicon.ico" Error (404): "Not found"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/css/main.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/libs/dat.gui.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/load-progress-controller.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/libs/stats.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/sketch.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/load.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/res/img/loading-screen.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/camera/CameraMouseControl.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/camera/CameraKeyControl.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/InsectWorld.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/MiniMap.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:46:59 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/camera/CameraTouchControl.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/worldobject/env/PineTree.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/MapLoader.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/extra/Vector.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/camera/Camera.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/WorldObject.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/world/worldobject/env/ants/colony/AntColony.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/js/extra/Math.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/res/resources.json" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/res/creatures/spider/spider12.png" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/res/creatures/spider/spider_map.json" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+[Wed Feb 26 2025 20:47:00 GMT+0530 (India Standard Time)]  "GET /InsectRealms/res/maps/M0001.json" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
